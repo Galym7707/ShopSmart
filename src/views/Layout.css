@@ -1,22 +1,42 @@
+/* Nav-link для десктопной шапки */
 .Nav-link {
-	--color-text: var(--color-accent);
 	text-decoration: none;
-	color: var(--color-text);
 	font-weight: bold;
+	padding: 8px 12px;
+	border-radius: 8px; /* Согласуем с shape.borderRadius из темы */
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	color: inherit; /* Цвет текста будет наследоваться от родителя (AppBar) */
 }
 
 .Nav-link:hover {
-	text-decoration: underline;
+	background-color: rgba(255, 255, 255, 0.15); /* Легкое осветление при наведении */
 }
 
 .Nav-link.active {
-	text-decoration-thickness: 0.22em;
-	text-underline-offset: 0.1em;
-	text-decoration: underline;
+	background-color: rgba(255, 255, 255, 0.25); /* Более явное выделение активной ссылки */
+	/* Можно добавить нижнее подчеркивание, если нужно */
+	/* text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px; */
 }
 
+/* Menu-nav-link для мобильного меню */
 .Menu-nav-link {
 	text-decoration: none;
-	color: inherit;
-	font-size: 1.1em;
+	color: inherit; /* Будет наследоваться от MenuItem (т.е. от темы текста) */
+	font-size: 1rem;
+	font-weight: 500; /* Сделаем чуть жирнее */
+	display: block;
+	width: 100%;
+	padding: 10px 16px; /* Немного увеличим отступы */
+	border-radius: 8px;
+}
+
+.Menu-nav-link:hover {
+	background-color: rgba(0, 0, 0, 0.06); /* Стандартный MUI hover для MenuItem */
+}
+
+.Menu-nav-link.active {
+	font-weight: 700; /* Активная ссылка в меню жирнее */
+	/* background-color: rgba(0, 0, 0, 0.08); /* Можно добавить фон для активной */
 }

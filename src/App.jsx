@@ -1,94 +1,99 @@
 import { useEffect, useState } from 'react';
 import {
-	BrowserRouter as Router,
+	BrowserRouter as Router, // Переименовал для ясности, что это корневой Router
 	Routes,
 	Route,
 	Navigate,
+	useParams,
+	useNavigate,
 } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
-
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
 import { ThemeProvider } from './theme/ThemeProvider';
 
+// Компонент-обертка для чтения токена из URL и установки его
+function JoinListTokenSetter({ setListToken }) {
+	const { tokenFromUrl } = useParams();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (tokenFromUrl) {
+			console.log('Token from URL:', tokenFromUrl);
+			setListToken(tokenFromUrl);
+			navigate('/list', { replace: true });
+		} else {
+			navigate('/', { replace: true });
+		}
+	}, [tokenFromUrl, setListToken, navigate]);
+
+	return null;
+}
+
+
 export function App() {
 	const [data, setData] = useState([]);
-
-	/**
-	 * Here, we're using a custom hook to create `listToken` and a function
-	 * that can be used to update `listToken` later.
-	 *
-	 * `listToken` is `my test list` by default so you can see the list
-	 * of items that was prepopulated for this project.
-	 * You'll later set it to `null` by default (since new users do not
-	 * have tokens), and use `setListToken` when you allow a user
-	 * to create and join a new list.
-	 */
 	const [listToken, setListToken] = useStateWithStorage(
 		null,
 		'tcl-shopping-list-token',
 	);
 
 	useEffect(() => {
-		if (!listToken) return;
-
-		/**
-		 * streamListItems` takes a `listToken` so it can communicate
-		 * with our database, then calls a callback function with
-		 * a `snapshot` from the database.
-		 *
-		 * Refer to `api/firebase.js`.
-		 */
-		return streamListItems(listToken, (snapshot) => {
-			/**
-			 * Here, we read the documents in the snapshot and do some work
-			 * on them, so we can save them in our React state.
-			 *
-			 * Refer to `api/firebase.js`
-			 */
+		if (!listToken) {
+			setData([]);
+			return;
+		}
+		const unsubscribe = streamListItems(listToken, (snapshot) => { // Сохраняем функцию отписки
 			const nextData = getItemData(snapshot);
-
-			/** Finally, we update our React state. */
 			setData(nextData);
 		});
+		return unsubscribe; // Отписываемся при размонтировании или смене listToken
 	}, [listToken]);
 
 	return (
 		<ThemeProvider>
 			<Router>
 				<Routes>
-					<Route path="/" element={<Layout listToken={listToken} />}>
+					<Route
+						path="/join/:tokenFromUrl"
+						element={<JoinListTokenSetter setListToken={setListToken} />}
+					/>
+					<Route
+						path="/"
+						element={<Layout listToken={listToken} setListToken={setListToken} />}
+					>
 						<Route
-							path="/"
+							index
 							element={
 								listToken ? (
-									<Navigate to="/list" />
+									<Navigate to="/list" replace />
 								) : (
 									<Home setListToken={setListToken} />
 								)
 							}
 						/>
 						<Route
-							path="/list"
+							path="list"
 							element={
 								listToken ? (
 									<List data={data} listToken={listToken} />
 								) : (
-									<Navigate to="/" />
+									<Navigate to="/" replace />
 								)
 							}
 						/>
 						<Route
-							path="/add-item"
+							path="add-item"
 							element={
 								listToken ? (
-									<AddItem data={data} listToken={listToken} />
+									<AddItem listToken={listToken} />
 								) : (
-									<Navigate to="/" />
+									<Navigate to="/" replace />
 								)
 							}
 						/>
+						<Route path="*" element={<Navigate to="/" replace />} />
 					</Route>
 				</Routes>
 			</Router>
