@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // Ensure React is imported
+import React, { useEffect, useState } from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -8,50 +8,47 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
+import { MyLists } from './views/MyLists'; // Импортируем MyLists
 import { AddItem, Home, Layout, List } from './views';
-import { getItemData, streamListItems } from './api'; // getItemData is used
-import { useStateWithStorage } from './utils';
+import { getItemData, streamListItems } from './api';
+import { useStateWithStorage, useListTokens } from './utils'; // Добавили useListTokens
 import { ThemeProvider } from './theme/ThemeProvider';
 
-// Component-wrapper for reading token from URL and setting it
 function JoinListTokenSetter({ setListToken }) {
 	const { tokenFromUrl } = useParams();
 	const navigate = useNavigate();
+	// eslint-disable-next-line no-unused-vars
+	const [_, addTokenToSaved] = useListTokens(); // Получаем addTokenToSaved
 
 	useEffect(() => {
 		if (tokenFromUrl) {
-			// console.log('Token from URL:', tokenFromUrl);
+			addTokenToSaved(tokenFromUrl); // Сохраняем токен при переходе по прямой ссылке
 			setListToken(tokenFromUrl);
-			navigate('/list', { replace: true }); // Redirect to the list page
+			navigate('/list', { replace: true });
 		} else {
-			// If somehow landed on /join without a token, go home
 			navigate('/', { replace: true });
 		}
-	}, [tokenFromUrl, setListToken, navigate]);
+	}, [tokenFromUrl, setListToken, navigate, addTokenToSaved]);
 
-	return null; // This component does not render anything itself
+	return null;
 }
 
 export function App() {
-	const [data, setData] = useState([]); // Holds the current list items
+	const [data, setData] = useState([]);
 	const [listToken, setListToken] = useStateWithStorage(
-		null, // Default to no token
-		'tcl-shopping-list-token', // Key for localStorage
+		null,
+		'tcl-shopping-list-token',
 	);
 
 	useEffect(() => {
 		if (!listToken) {
-			setData([]); // Clear data if no token
+			setData([]);
 			return;
 		}
-
-		// Subscribe to list items
 		const unsubscribe = streamListItems(listToken, (snapshot) => {
-			const nextData = snapshot.docs.map(getItemData); // Use getItemData for each doc
+			const nextData = snapshot.docs.map(getItemData);
 			setData(nextData);
 		});
-
-		// Cleanup subscription on component unmount or when listToken changes
 		return () => unsubscribe();
 	}, [listToken]);
 
@@ -60,22 +57,22 @@ export function App() {
 			<Router>
 				<Routes>
 					<Route
-						path="/join/:tokenFromUrl" // Route for joining a list via URL
+						path="/join/:tokenFromUrl"
 						element={<JoinListTokenSetter setListToken={setListToken} />}
 					/>
 					<Route
 						path="/"
 						element={
 							<Layout listToken={listToken} setListToken={setListToken} />
-						} // Main layout
+						}
 					>
 						<Route
-							index // Default route for "/"
+							index
 							element={
 								listToken ? (
-									<Navigate to="/list" replace /> // If token exists, go to list
+									<Navigate to="/list" replace />
 								) : (
-									<Home setListToken={setListToken} /> // Else, show Home page
+									<Home setListToken={setListToken} />
 								)
 							}
 						/>
@@ -83,9 +80,9 @@ export function App() {
 							path="list"
 							element={
 								listToken ? (
-									<List data={data} listToken={listToken} /> // Pass data to List
+									<List data={data} listToken={listToken} />
 								) : (
-									<Navigate to="/" replace /> // If no token, redirect to Home
+									<Navigate to="/" replace />
 								)
 							}
 						/>
@@ -93,14 +90,18 @@ export function App() {
 							path="add-item"
 							element={
 								listToken ? (
-									// Pass current list data to AddItem for duplicate checking
 									<AddItem listToken={listToken} data={data} />
 								) : (
-									<Navigate to="/" replace /> // If no token, redirect to Home
+									<Navigate to="/" replace />
 								)
 							}
 						/>
-						{/* Catch-all route for undefined paths, redirects to Home */}
+						{/* Маршрут для MyLists */}
+						<Route
+							path="my-lists"
+							// Передаем setListToken, чтобы можно было выбрать список и сделать его активным
+							element={<MyLists setListToken={setListToken} />}
+						/>
 						<Route path="*" element={<Navigate to="/" replace />} />
 					</Route>
 				</Routes>

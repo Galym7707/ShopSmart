@@ -2,6 +2,7 @@
 Серийный номер тома: 4E92-4DD6
 C:.
 |   .env
+|   .eslintcache
 |   .eslintrc.json
 |   .gitignore
 |   .nvmrc
@@ -14,10 +15,9 @@ C:.
 |   package-lock.json
 |   package.json
 |   PROJECT-BRIEF.md
-|   project_structure.txt
 |   pull_request_template.md
 |   README.md
-|   structure.txt
+|   struc.txt
 |   vite.config.js
 |   
 +---.github
@@ -149,13 +149,87 @@ C:.
 |   |       why-is-node-running
 |   |       why-is-node-running.cmd
 |   |       why-is-node-running.ps1
-|   |       yaml
-|   |       yaml.cmd
-|   |       yaml.ps1
 |   |       
 |   +---.cache
 |   |   \---prettier
 |   |           .prettier-cache
+|   |           
+|   +---.vite
+|   |   \---deps
+|   |           @mui_icons-material_Add.js
+|   |           @mui_icons-material_Add.js.map
+|   |           @mui_icons-material_Delete.js
+|   |           @mui_icons-material_Delete.js.map
+|   |           @mui_icons-material_Home.js
+|   |           @mui_icons-material_Home.js.map
+|   |           @mui_icons-material_Menu.js
+|   |           @mui_icons-material_Menu.js.map
+|   |           @mui_icons-material_Search.js
+|   |           @mui_icons-material_Search.js.map
+|   |           @mui_icons-material_Share.js
+|   |           @mui_icons-material_Share.js.map
+|   |           @mui_icons-material_ShoppingCartCheckout.js
+|   |           @mui_icons-material_ShoppingCartCheckout.js.map
+|   |           @mui_material.js
+|   |           @mui_material.js.map
+|   |           @mui_material_CssBaseline.js
+|   |           @mui_material_CssBaseline.js.map
+|   |           @mui_material_styles.js
+|   |           @mui_material_styles.js.map
+|   |           @mui_material_useMediaQuery.js
+|   |           @mui_material_useMediaQuery.js.map
+|   |           @the-collab-lab_shopping-list-utils.js
+|   |           @the-collab-lab_shopping-list-utils.js.map
+|   |           chunk-75YRGT3W.js
+|   |           chunk-75YRGT3W.js.map
+|   |           chunk-7GI77L2A.js
+|   |           chunk-7GI77L2A.js.map
+|   |           chunk-AZXCTZSN.js
+|   |           chunk-AZXCTZSN.js.map
+|   |           chunk-DIHP6GZQ.js
+|   |           chunk-DIHP6GZQ.js.map
+|   |           chunk-DIZ2CTVX.js
+|   |           chunk-DIZ2CTVX.js.map
+|   |           chunk-EQEDIBR2.js
+|   |           chunk-EQEDIBR2.js.map
+|   |           chunk-EW5LRKD4.js
+|   |           chunk-EW5LRKD4.js.map
+|   |           chunk-J7VFEPLA.js
+|   |           chunk-J7VFEPLA.js.map
+|   |           chunk-LXGCQ6UQ.js
+|   |           chunk-LXGCQ6UQ.js.map
+|   |           chunk-OY7T7X2B.js
+|   |           chunk-OY7T7X2B.js.map
+|   |           chunk-ROME4SDB.js
+|   |           chunk-ROME4SDB.js.map
+|   |           chunk-VZBRM2AZ.js
+|   |           chunk-VZBRM2AZ.js.map
+|   |           chunk-XP74F4NL.js
+|   |           chunk-XP74F4NL.js.map
+|   |           chunk-YO4ILMUD.js
+|   |           chunk-YO4ILMUD.js.map
+|   |           chunk-YQBMKNN2.js
+|   |           chunk-YQBMKNN2.js.map
+|   |           chunk-ZRNALROW.js
+|   |           chunk-ZRNALROW.js.map
+|   |           firebase_app.js
+|   |           firebase_app.js.map
+|   |           firebase_firestore.js
+|   |           firebase_firestore.js.map
+|   |           package.json
+|   |           react-dom_client.js
+|   |           react-dom_client.js.map
+|   |           react-router-dom.js
+|   |           react-router-dom.js.map
+|   |           react.js
+|   |           react.js.map
+|   |           react_jsx-dev-runtime.js
+|   |           react_jsx-dev-runtime.js.map
+|   |           react_jsx-runtime.js
+|   |           react_jsx-runtime.js.map
+|   |           toastify-js.js
+|   |           toastify-js.js.map
+|   |           _metadata.json
 |   |           
 |   +---@adobe
 |   |   \---css-tools
@@ -49110,30 +49184,6 @@ C:.
 |   |   |       package.json
 |   |   |       README.md
 |   |   |       
-|   |   +---babel__core
-|   |   |       index.d.ts
-|   |   |       LICENSE
-|   |   |       package.json
-|   |   |       README.md
-|   |   |       
-|   |   +---babel__generator
-|   |   |       index.d.ts
-|   |   |       LICENSE
-|   |   |       package.json
-|   |   |       README.md
-|   |   |       
-|   |   +---babel__template
-|   |   |       index.d.ts
-|   |   |       LICENSE
-|   |   |       package.json
-|   |   |       README.md
-|   |   |       
-|   |   +---babel__traverse
-|   |   |       index.d.ts
-|   |   |       LICENSE
-|   |   |       package.json
-|   |   |       README.md
-|   |   |       
 |   |   +---eslint
 |   |   |   |   index.d.ts
 |   |   |   |   LICENSE
@@ -51460,11 +51510,9 @@ C:.
 |   |       |   
 |   |       \---dist
 |   |               index.cjs
-|   |               index.d.cts
-|   |               index.d.mts
 |   |               index.d.ts
 |   |               index.mjs
-|   |               refresh-runtime.js
+|   |               refreshUtils.js
 |   |               
 |   +---@vitest
 |   |   +---expect
@@ -51478,51 +51526,6 @@ C:.
 |   |   |           index.d.ts
 |   |   |           index.js
 |   |   |           
-|   |   +---mocker
-|   |   |   |   LICENSE
-|   |   |   |   package.json
-|   |   |   |   README.md
-|   |   |   |   
-|   |   |   +---dist
-|   |   |   |       auto-register.d.ts
-|   |   |   |       auto-register.js
-|   |   |   |       browser.d.ts
-|   |   |   |       browser.js
-|   |   |   |       chunk-interceptor-native.js
-|   |   |   |       chunk-mocker.js
-|   |   |   |       chunk-pathe.M-eThtNZ.js
-|   |   |   |       chunk-registry.js
-|   |   |   |       chunk-utils.js
-|   |   |   |       index.d.ts
-|   |   |   |       index.js
-|   |   |   |       mocker.d-B3zjcR_8.d.ts
-|   |   |   |       node.d.ts
-|   |   |   |       node.js
-|   |   |   |       redirect.d.ts
-|   |   |   |       redirect.js
-|   |   |   |       register.d.ts
-|   |   |   |       register.js
-|   |   |   |       registry.d-D765pazg.d.ts
-|   |   |   |       types.d-D_aRZRdy.d.ts
-|   |   |   |       
-|   |   |   \---node_modules
-|   |   |       \---estree-walker
-|   |   |           |   LICENSE
-|   |   |           |   package.json
-|   |   |           |   README.md
-|   |   |           |   
-|   |   |           +---src
-|   |   |           |       async.js
-|   |   |           |       index.js
-|   |   |           |       sync.js
-|   |   |           |       walker.js
-|   |   |           |       
-|   |   |           \---types
-|   |   |                   async.d.ts
-|   |   |                   index.d.ts
-|   |   |                   sync.d.ts
-|   |   |                   walker.d.ts
-|   |   |                   
 |   |   +---pretty-format
 |   |   |   |   LICENSE
 |   |   |   |   package.json
@@ -51555,16 +51558,32 @@ C:.
 |   |   |   |   package.json
 |   |   |   |   README.md
 |   |   |   |   
-|   |   |   \---dist
-|   |   |           environment.d-DHdQ1Csl.d.ts
-|   |   |           environment.d.ts
-|   |   |           environment.js
-|   |   |           index.d.ts
-|   |   |           index.js
-|   |   |           manager.d.ts
-|   |   |           manager.js
-|   |   |           rawSnapshot.d-lFsMJFUd.d.ts
-|   |   |           
+|   |   |   +---dist
+|   |   |   |       environment.d-DHdQ1Csl.d.ts
+|   |   |   |       environment.d.ts
+|   |   |   |       environment.js
+|   |   |   |       index.d.ts
+|   |   |   |       index.js
+|   |   |   |       manager.d.ts
+|   |   |   |       manager.js
+|   |   |   |       rawSnapshot.d-lFsMJFUd.d.ts
+|   |   |   |       
+|   |   |   \---node_modules
+|   |   |       \---magic-string
+|   |   |           |   LICENSE
+|   |   |           |   package.json
+|   |   |           |   README.md
+|   |   |           |   
+|   |   |           \---dist
+|   |   |                   magic-string.cjs.d.ts
+|   |   |                   magic-string.cjs.js
+|   |   |                   magic-string.cjs.js.map
+|   |   |                   magic-string.es.d.mts
+|   |   |                   magic-string.es.mjs
+|   |   |                   magic-string.es.mjs.map
+|   |   |                   magic-string.umd.js
+|   |   |                   magic-string.umd.js.map
+|   |   |                   
 |   |   +---spy
 |   |   |   |   LICENSE
 |   |   |   |   package.json
@@ -54129,119 +54148,48 @@ C:.
 |   |   |   package.json
 |   |   |   README.md
 |   |   |   
-|   |   +---dist
-|   |   |       cacheWrapper.d.ts
-|   |   |       cacheWrapper.d.ts.map
-|   |   |       cacheWrapper.js
-|   |   |       cacheWrapper.js.map
-|   |   |       Explorer.d.ts
-|   |   |       Explorer.d.ts.map
-|   |   |       Explorer.js
-|   |   |       Explorer.js.map
-|   |   |       ExplorerBase.d.ts
-|   |   |       ExplorerBase.d.ts.map
-|   |   |       ExplorerBase.js
-|   |   |       ExplorerBase.js.map
-|   |   |       ExplorerSync.d.ts
-|   |   |       ExplorerSync.d.ts.map
-|   |   |       ExplorerSync.js
-|   |   |       ExplorerSync.js.map
-|   |   |       getDirectory.d.ts
-|   |   |       getDirectory.d.ts.map
-|   |   |       getDirectory.js
-|   |   |       getDirectory.js.map
-|   |   |       getPropertyByPath.d.ts
-|   |   |       getPropertyByPath.d.ts.map
-|   |   |       getPropertyByPath.js
-|   |   |       getPropertyByPath.js.map
-|   |   |       index.d.ts
-|   |   |       index.d.ts.map
-|   |   |       index.js
-|   |   |       index.js.map
-|   |   |       loaders.d.ts
-|   |   |       loaders.d.ts.map
-|   |   |       loaders.js
-|   |   |       loaders.js.map
-|   |   |       readFile.d.ts
-|   |   |       readFile.d.ts.map
-|   |   |       readFile.js
-|   |   |       readFile.js.map
-|   |   |       types.d.ts
-|   |   |       types.d.ts.map
-|   |   |       types.js
-|   |   |       types.js.map
-|   |   |       
-|   |   \---node_modules
-|   |       \---yaml
-|   |           |   index.d.ts
-|   |           |   index.js
-|   |           |   LICENSE
-|   |           |   map.js
-|   |           |   package.json
-|   |           |   pair.js
-|   |           |   parse-cst.d.ts
-|   |           |   parse-cst.js
-|   |           |   README.md
-|   |           |   scalar.js
-|   |           |   schema.js
-|   |           |   seq.js
-|   |           |   types.d.ts
-|   |           |   types.js
-|   |           |   types.mjs
-|   |           |   util.d.ts
-|   |           |   util.js
-|   |           |   util.mjs
-|   |           |   
-|   |           +---browser
-|   |           |   |   index.js
-|   |           |   |   map.js
-|   |           |   |   pair.js
-|   |           |   |   parse-cst.js
-|   |           |   |   scalar.js
-|   |           |   |   schema.js
-|   |           |   |   seq.js
-|   |           |   |   types.js
-|   |           |   |   util.js
-|   |           |   |   
-|   |           |   +---dist
-|   |           |   |       index.js
-|   |           |   |       legacy-exports.js
-|   |           |   |       package.json
-|   |           |   |       parse-cst.js
-|   |           |   |       PlainValue-b8036b75.js
-|   |           |   |       resolveSeq-492ab440.js
-|   |           |   |       Schema-e94716c8.js
-|   |           |   |       types.js
-|   |           |   |       util.js
-|   |           |   |       warnings-df54cb69.js
-|   |           |   |       
-|   |           |   \---types
-|   |           |           binary.js
-|   |           |           omap.js
-|   |           |           pairs.js
-|   |           |           set.js
-|   |           |           timestamp.js
-|   |           |           
-|   |           +---dist
-|   |           |       Document-9b4560a1.js
-|   |           |       index.js
-|   |           |       legacy-exports.js
-|   |           |       parse-cst.js
-|   |           |       PlainValue-ec8e588e.js
-|   |           |       resolveSeq-d03cb037.js
-|   |           |       Schema-88e323a7.js
-|   |           |       test-events.js
-|   |           |       types.js
-|   |           |       util.js
-|   |           |       warnings-1000a372.js
-|   |           |       
-|   |           \---types
-|   |                   binary.js
-|   |                   omap.js
-|   |                   pairs.js
-|   |                   set.js
-|   |                   timestamp.js
-|   |                   
+|   |   \---dist
+|   |           cacheWrapper.d.ts
+|   |           cacheWrapper.d.ts.map
+|   |           cacheWrapper.js
+|   |           cacheWrapper.js.map
+|   |           Explorer.d.ts
+|   |           Explorer.d.ts.map
+|   |           Explorer.js
+|   |           Explorer.js.map
+|   |           ExplorerBase.d.ts
+|   |           ExplorerBase.d.ts.map
+|   |           ExplorerBase.js
+|   |           ExplorerBase.js.map
+|   |           ExplorerSync.d.ts
+|   |           ExplorerSync.d.ts.map
+|   |           ExplorerSync.js
+|   |           ExplorerSync.js.map
+|   |           getDirectory.d.ts
+|   |           getDirectory.d.ts.map
+|   |           getDirectory.js
+|   |           getDirectory.js.map
+|   |           getPropertyByPath.d.ts
+|   |           getPropertyByPath.d.ts.map
+|   |           getPropertyByPath.js
+|   |           getPropertyByPath.js.map
+|   |           index.d.ts
+|   |           index.d.ts.map
+|   |           index.js
+|   |           index.js.map
+|   |           loaders.d.ts
+|   |           loaders.d.ts.map
+|   |           loaders.js
+|   |           loaders.js.map
+|   |           readFile.d.ts
+|   |           readFile.d.ts.map
+|   |           readFile.js
+|   |           readFile.js.map
+|   |           types.d.ts
+|   |           types.d.ts.map
+|   |           types.js
+|   |           types.js.map
+|   |           
 |   +---cross-spawn
 |   |   |   index.js
 |   |   |   LICENSE
@@ -73611,15 +73559,14 @@ C:.
 |   |           lz-string.d.ts
 |   |           
 |   +---magic-string
+|   |   |   index.d.ts
 |   |   |   LICENSE
 |   |   |   package.json
 |   |   |   README.md
 |   |   |   
 |   |   \---dist
-|   |           magic-string.cjs.d.ts
 |   |           magic-string.cjs.js
 |   |           magic-string.cjs.js.map
-|   |           magic-string.es.d.mts
 |   |           magic-string.es.mjs
 |   |           magic-string.es.mjs.map
 |   |           magic-string.umd.js
@@ -74789,9 +74736,9 @@ C:.
 |   |   |   
 |   |   \---cjs
 |   |           react-refresh-babel.development.js
-|   |           react-refresh-babel.production.js
+|   |           react-refresh-babel.production.min.js
 |   |           react-refresh-runtime.development.js
-|   |           react-refresh-runtime.production.js
+|   |           react-refresh-runtime.production.min.js
 |   |           
 |   +---react-router
 |   |   |   CHANGELOG.md
@@ -75769,9 +75716,6 @@ C:.
 |   |       |   getLogFilter.js
 |   |       |   loadConfigFile.d.ts
 |   |       |   loadConfigFile.js
-|   |       |   native.js
-|   |       |   parseAst.d.ts
-|   |       |   parseAst.js
 |   |       |   rollup.d.ts
 |   |       |   rollup.js
 |   |       |   
@@ -75781,21 +75725,19 @@ C:.
 |   |       +---es
 |   |       |   |   getLogFilter.js
 |   |       |   |   package.json
-|   |       |   |   parseAst.js
 |   |       |   |   rollup.js
 |   |       |   |   
 |   |       |   \---shared
 |   |       |           node-entry.js
-|   |       |           parseAst.js
 |   |       |           watch.js
 |   |       |           
 |   |       \---shared
 |   |               fsevents-importer.js
 |   |               index.js
 |   |               loadConfigFile.js
-|   |               parseAst.js
 |   |               rollup.js
 |   |               watch-cli.js
+|   |               watch-proxy.js
 |   |               watch.js
 |   |               
 |   +---rrweb-cssom
@@ -77697,7 +77639,6 @@ C:.
 |   +---vite
 |   |   |   client.d.ts
 |   |   |   index.cjs
-|   |   |   index.d.cts
 |   |   |   LICENSE.md
 |   |   |   package.json
 |   |   |   README.md
@@ -77709,154 +77650,551 @@ C:.
 |   |   +---dist
 |   |   |   +---client
 |   |   |   |       client.mjs
+|   |   |   |       client.mjs.map
 |   |   |   |       env.mjs
+|   |   |   |       env.mjs.map
 |   |   |   |       
 |   |   |   +---node
 |   |   |   |   |   cli.js
 |   |   |   |   |   constants.js
 |   |   |   |   |   index.d.ts
 |   |   |   |   |   index.js
-|   |   |   |   |   module-runner.d.ts
-|   |   |   |   |   module-runner.js
-|   |   |   |   |   moduleRunnerTransport.d-DJ_mE5sf.d.ts
 |   |   |   |   |   
 |   |   |   |   \---chunks
-|   |   |   |           dep-3RmXg9uo.js
-|   |   |   |           dep-AiMcmC_f.js
-|   |   |   |           dep-CvfTChi5.js
-|   |   |   |           dep-DBxKXgDP.js
-|   |   |   |           dep-SgSik2vo.js
+|   |   |   |           dep-7ec6f216.js
+|   |   |   |           dep-827b23df.js
+|   |   |   |           dep-c423598f.js
+|   |   |   |           dep-f0c7dae0.js
+|   |   |   |           dep-f1e8587f.js
 |   |   |   |           
 |   |   |   \---node-cjs
 |   |   |           publicUtils.cjs
 |   |   |           
-|   |   +---misc
-|   |   |       false.js
-|   |   |       true.js
-|   |   |       
-|   |   +---node_modules
-|   |   |   +---fdir
-|   |   |   |   |   LICENSE
-|   |   |   |   |   package.json
-|   |   |   |   |   README.md
-|   |   |   |   |   
-|   |   |   |   \---dist
-|   |   |   |       |   index.d.ts
-|   |   |   |       |   index.js
-|   |   |   |       |   optimizer.d.ts
-|   |   |   |       |   optimizer.js
-|   |   |   |       |   types.d.ts
-|   |   |   |       |   types.js
-|   |   |   |       |   utils.d.ts
-|   |   |   |       |   utils.js
-|   |   |   |       |   
-|   |   |   |       +---api
-|   |   |   |       |   |   async.d.ts
-|   |   |   |       |   |   async.js
-|   |   |   |       |   |   counter.d.ts
-|   |   |   |       |   |   counter.js
-|   |   |   |       |   |   queue.d.ts
-|   |   |   |       |   |   queue.js
-|   |   |   |       |   |   sync.d.ts
-|   |   |   |       |   |   sync.js
-|   |   |   |       |   |   walker.d.ts
-|   |   |   |       |   |   walker.js
-|   |   |   |       |   |   
-|   |   |   |       |   \---functions
-|   |   |   |       |           get-array.d.ts
-|   |   |   |       |           get-array.js
-|   |   |   |       |           group-files.d.ts
-|   |   |   |       |           group-files.js
-|   |   |   |       |           invoke-callback.d.ts
-|   |   |   |       |           invoke-callback.js
-|   |   |   |       |           is-recursive-symlink.d.ts
-|   |   |   |       |           is-recursive-symlink.js
-|   |   |   |       |           join-path.d.ts
-|   |   |   |       |           join-path.js
-|   |   |   |       |           push-directory.d.ts
-|   |   |   |       |           push-directory.js
-|   |   |   |       |           push-file.d.ts
-|   |   |   |       |           push-file.js
-|   |   |   |       |           resolve-symlink.d.ts
-|   |   |   |       |           resolve-symlink.js
-|   |   |   |       |           walk-directory.d.ts
-|   |   |   |       |           walk-directory.js
-|   |   |   |       |           
-|   |   |   |       \---builder
-|   |   |   |               api-builder.d.ts
-|   |   |   |               api-builder.js
-|   |   |   |               index.d.ts
-|   |   |   |               index.js
-|   |   |   |               
-|   |   |   \---picomatch
-|   |   |       |   index.js
-|   |   |       |   LICENSE
-|   |   |       |   package.json
-|   |   |       |   posix.js
-|   |   |       |   README.md
-|   |   |       |   
-|   |   |       \---lib
-|   |   |               constants.js
-|   |   |               parse.js
-|   |   |               picomatch.js
-|   |   |               scan.js
-|   |   |               utils.js
-|   |   |               
 |   |   \---types
-|   |       |   customEvent.d.ts
-|   |       |   hmrPayload.d.ts
-|   |       |   hot.d.ts
-|   |       |   import-meta.d.ts
-|   |       |   importGlob.d.ts
-|   |       |   importMeta.d.ts
-|   |       |   metadata.d.ts
-|   |       |   package.json
-|   |       |   
-|   |       \---internal
-|   |               cssPreprocessorOptions.d.ts
-|   |               lightningcssOptions.d.ts
-|   |               
+|   |           customEvent.d.ts
+|   |           hmrPayload.d.ts
+|   |           hot.d.ts
+|   |           importGlob.d.ts
+|   |           importMeta.d.ts
+|   |           metadata.d.ts
+|   |           package.json
+|   |           
 |   +---vite-node
 |   |   |   LICENSE
 |   |   |   package.json
 |   |   |   README.md
 |   |   |   vite-node.mjs
 |   |   |   
-|   |   \---dist
-|   |           chunk-browser.cjs
-|   |           chunk-browser.mjs
-|   |           chunk-hmr.cjs
-|   |           chunk-hmr.mjs
-|   |           cli.cjs
-|   |           cli.d.ts
-|   |           cli.mjs
-|   |           client.cjs
-|   |           client.d.ts
-|   |           client.mjs
-|   |           constants.cjs
-|   |           constants.d.ts
-|   |           constants.mjs
-|   |           hmr.cjs
-|   |           hmr.d.ts
-|   |           hmr.mjs
-|   |           index.cjs
-|   |           index.d-CWZbpOcv.d.ts
-|   |           index.d.ts
-|   |           index.mjs
-|   |           server.cjs
-|   |           server.d.ts
-|   |           server.mjs
-|   |           source-map.cjs
-|   |           source-map.d.ts
-|   |           source-map.mjs
-|   |           trace-mapping.d-DLVdEqOp.d.ts
-|   |           types.cjs
-|   |           types.d.ts
-|   |           types.mjs
-|   |           utils.cjs
-|   |           utils.d.ts
-|   |           utils.mjs
-|   |           
+|   |   +---dist
+|   |   |       chunk-browser.cjs
+|   |   |       chunk-browser.mjs
+|   |   |       chunk-hmr.cjs
+|   |   |       chunk-hmr.mjs
+|   |   |       cli.cjs
+|   |   |       cli.d.ts
+|   |   |       cli.mjs
+|   |   |       client.cjs
+|   |   |       client.d.ts
+|   |   |       client.mjs
+|   |   |       constants.cjs
+|   |   |       constants.d.ts
+|   |   |       constants.mjs
+|   |   |       hmr.cjs
+|   |   |       hmr.d.ts
+|   |   |       hmr.mjs
+|   |   |       index.cjs
+|   |   |       index.d-CWZbpOcv.d.ts
+|   |   |       index.d.ts
+|   |   |       index.mjs
+|   |   |       server.cjs
+|   |   |       server.d.ts
+|   |   |       server.mjs
+|   |   |       source-map.cjs
+|   |   |       source-map.d.ts
+|   |   |       source-map.mjs
+|   |   |       trace-mapping.d-DLVdEqOp.d.ts
+|   |   |       types.cjs
+|   |   |       types.d.ts
+|   |   |       types.mjs
+|   |   |       utils.cjs
+|   |   |       utils.d.ts
+|   |   |       utils.mjs
+|   |   |       
+|   |   \---node_modules
+|   |       +---.bin
+|   |       |       esbuild
+|   |       |       esbuild.cmd
+|   |       |       esbuild.ps1
+|   |       |       rollup
+|   |       |       rollup.cmd
+|   |       |       rollup.ps1
+|   |       |       vite
+|   |       |       vite.cmd
+|   |       |       vite.ps1
+|   |       |       yaml
+|   |       |       yaml.cmd
+|   |       |       yaml.ps1
+|   |       |       
+|   |       +---@esbuild
+|   |       |   \---win32-x64
+|   |       |           esbuild.exe
+|   |       |           package.json
+|   |       |           README.md
+|   |       |           
+|   |       +---esbuild
+|   |       |   |   install.js
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   +---bin
+|   |       |   |       esbuild
+|   |       |   |       
+|   |       |   \---lib
+|   |       |           main.d.ts
+|   |       |           main.js
+|   |       |           
+|   |       +---fdir
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---dist
+|   |       |       |   index.d.ts
+|   |       |       |   index.js
+|   |       |       |   optimizer.d.ts
+|   |       |       |   optimizer.js
+|   |       |       |   types.d.ts
+|   |       |       |   types.js
+|   |       |       |   utils.d.ts
+|   |       |       |   utils.js
+|   |       |       |   
+|   |       |       +---api
+|   |       |       |   |   async.d.ts
+|   |       |       |   |   async.js
+|   |       |       |   |   counter.d.ts
+|   |       |       |   |   counter.js
+|   |       |       |   |   queue.d.ts
+|   |       |       |   |   queue.js
+|   |       |       |   |   sync.d.ts
+|   |       |       |   |   sync.js
+|   |       |       |   |   walker.d.ts
+|   |       |       |   |   walker.js
+|   |       |       |   |   
+|   |       |       |   \---functions
+|   |       |       |           get-array.d.ts
+|   |       |       |           get-array.js
+|   |       |       |           group-files.d.ts
+|   |       |       |           group-files.js
+|   |       |       |           invoke-callback.d.ts
+|   |       |       |           invoke-callback.js
+|   |       |       |           is-recursive-symlink.d.ts
+|   |       |       |           is-recursive-symlink.js
+|   |       |       |           join-path.d.ts
+|   |       |       |           join-path.js
+|   |       |       |           push-directory.d.ts
+|   |       |       |           push-directory.js
+|   |       |       |           push-file.d.ts
+|   |       |       |           push-file.js
+|   |       |       |           resolve-symlink.d.ts
+|   |       |       |           resolve-symlink.js
+|   |       |       |           walk-directory.d.ts
+|   |       |       |           walk-directory.js
+|   |       |       |           
+|   |       |       \---builder
+|   |       |               api-builder.d.ts
+|   |       |               api-builder.js
+|   |       |               index.d.ts
+|   |       |               index.js
+|   |       |               
+|   |       +---picomatch
+|   |       |   |   index.js
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   posix.js
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---lib
+|   |       |           constants.js
+|   |       |           parse.js
+|   |       |           picomatch.js
+|   |       |           scan.js
+|   |       |           utils.js
+|   |       |           
+|   |       +---rollup
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---dist
+|   |       |       |   getLogFilter.d.ts
+|   |       |       |   getLogFilter.js
+|   |       |       |   loadConfigFile.d.ts
+|   |       |       |   loadConfigFile.js
+|   |       |       |   native.js
+|   |       |       |   parseAst.d.ts
+|   |       |       |   parseAst.js
+|   |       |       |   rollup.d.ts
+|   |       |       |   rollup.js
+|   |       |       |   
+|   |       |       +---bin
+|   |       |       |       rollup
+|   |       |       |       
+|   |       |       +---es
+|   |       |       |   |   getLogFilter.js
+|   |       |       |   |   package.json
+|   |       |       |   |   parseAst.js
+|   |       |       |   |   rollup.js
+|   |       |       |   |   
+|   |       |       |   \---shared
+|   |       |       |           node-entry.js
+|   |       |       |           parseAst.js
+|   |       |       |           watch.js
+|   |       |       |           
+|   |       |       \---shared
+|   |       |               fsevents-importer.js
+|   |       |               index.js
+|   |       |               loadConfigFile.js
+|   |       |               parseAst.js
+|   |       |               rollup.js
+|   |       |               watch-cli.js
+|   |       |               watch.js
+|   |       |               
+|   |       +---vite
+|   |       |   |   client.d.ts
+|   |       |   |   index.cjs
+|   |       |   |   index.d.cts
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   +---bin
+|   |       |   |       openChrome.applescript
+|   |       |   |       vite.js
+|   |       |   |       
+|   |       |   +---dist
+|   |       |   |   +---client
+|   |       |   |   |       client.mjs
+|   |       |   |   |       env.mjs
+|   |       |   |   |       
+|   |       |   |   +---node
+|   |       |   |   |   |   cli.js
+|   |       |   |   |   |   constants.js
+|   |       |   |   |   |   index.d.ts
+|   |       |   |   |   |   index.js
+|   |       |   |   |   |   module-runner.d.ts
+|   |       |   |   |   |   module-runner.js
+|   |       |   |   |   |   moduleRunnerTransport.d-DJ_mE5sf.d.ts
+|   |       |   |   |   |   
+|   |       |   |   |   \---chunks
+|   |       |   |   |           dep-3RmXg9uo.js
+|   |       |   |   |           dep-AiMcmC_f.js
+|   |       |   |   |           dep-CvfTChi5.js
+|   |       |   |   |           dep-DBxKXgDP.js
+|   |       |   |   |           dep-SgSik2vo.js
+|   |       |   |   |           
+|   |       |   |   \---node-cjs
+|   |       |   |           publicUtils.cjs
+|   |       |   |           
+|   |       |   +---misc
+|   |       |   |       false.js
+|   |       |   |       true.js
+|   |       |   |       
+|   |       |   \---types
+|   |       |       |   customEvent.d.ts
+|   |       |       |   hmrPayload.d.ts
+|   |       |       |   hot.d.ts
+|   |       |       |   import-meta.d.ts
+|   |       |       |   importGlob.d.ts
+|   |       |       |   importMeta.d.ts
+|   |       |       |   metadata.d.ts
+|   |       |       |   package.json
+|   |       |       |   
+|   |       |       \---internal
+|   |       |               cssPreprocessorOptions.d.ts
+|   |       |               lightningcssOptions.d.ts
+|   |       |               
+|   |       \---yaml
+|   |           |   bin.mjs
+|   |           |   LICENSE
+|   |           |   package.json
+|   |           |   README.md
+|   |           |   util.js
+|   |           |   
+|   |           +---browser
+|   |           |   |   index.js
+|   |           |   |   package.json
+|   |           |   |   
+|   |           |   \---dist
+|   |           |       |   errors.js
+|   |           |       |   index.js
+|   |           |       |   log.js
+|   |           |       |   public-api.js
+|   |           |       |   util.js
+|   |           |       |   visit.js
+|   |           |       |   
+|   |           |       +---compose
+|   |           |       |       compose-collection.js
+|   |           |       |       compose-doc.js
+|   |           |       |       compose-node.js
+|   |           |       |       compose-scalar.js
+|   |           |       |       composer.js
+|   |           |       |       resolve-block-map.js
+|   |           |       |       resolve-block-scalar.js
+|   |           |       |       resolve-block-seq.js
+|   |           |       |       resolve-end.js
+|   |           |       |       resolve-flow-collection.js
+|   |           |       |       resolve-flow-scalar.js
+|   |           |       |       resolve-props.js
+|   |           |       |       util-contains-newline.js
+|   |           |       |       util-empty-scalar-position.js
+|   |           |       |       util-flow-indent-check.js
+|   |           |       |       util-map-includes.js
+|   |           |       |       
+|   |           |       +---doc
+|   |           |       |       anchors.js
+|   |           |       |       applyReviver.js
+|   |           |       |       createNode.js
+|   |           |       |       directives.js
+|   |           |       |       Document.js
+|   |           |       |       
+|   |           |       +---nodes
+|   |           |       |       addPairToJSMap.js
+|   |           |       |       Alias.js
+|   |           |       |       Collection.js
+|   |           |       |       identity.js
+|   |           |       |       Node.js
+|   |           |       |       Pair.js
+|   |           |       |       Scalar.js
+|   |           |       |       toJS.js
+|   |           |       |       YAMLMap.js
+|   |           |       |       YAMLSeq.js
+|   |           |       |       
+|   |           |       +---parse
+|   |           |       |       cst-scalar.js
+|   |           |       |       cst-stringify.js
+|   |           |       |       cst-visit.js
+|   |           |       |       cst.js
+|   |           |       |       lexer.js
+|   |           |       |       line-counter.js
+|   |           |       |       parser.js
+|   |           |       |       
+|   |           |       +---schema
+|   |           |       |   |   Schema.js
+|   |           |       |   |   tags.js
+|   |           |       |   |   
+|   |           |       |   +---common
+|   |           |       |   |       map.js
+|   |           |       |   |       null.js
+|   |           |       |   |       seq.js
+|   |           |       |   |       string.js
+|   |           |       |   |       
+|   |           |       |   +---core
+|   |           |       |   |       bool.js
+|   |           |       |   |       float.js
+|   |           |       |   |       int.js
+|   |           |       |   |       schema.js
+|   |           |       |   |       
+|   |           |       |   +---json
+|   |           |       |   |       schema.js
+|   |           |       |   |       
+|   |           |       |   \---yaml-1.1
+|   |           |       |           binary.js
+|   |           |       |           bool.js
+|   |           |       |           float.js
+|   |           |       |           int.js
+|   |           |       |           merge.js
+|   |           |       |           omap.js
+|   |           |       |           pairs.js
+|   |           |       |           schema.js
+|   |           |       |           set.js
+|   |           |       |           timestamp.js
+|   |           |       |           
+|   |           |       \---stringify
+|   |           |               foldFlowLines.js
+|   |           |               stringify.js
+|   |           |               stringifyCollection.js
+|   |           |               stringifyComment.js
+|   |           |               stringifyDocument.js
+|   |           |               stringifyNumber.js
+|   |           |               stringifyPair.js
+|   |           |               stringifyString.js
+|   |           |               
+|   |           \---dist
+|   |               |   cli.d.ts
+|   |               |   cli.mjs
+|   |               |   errors.d.ts
+|   |               |   errors.js
+|   |               |   index.d.ts
+|   |               |   index.js
+|   |               |   log.d.ts
+|   |               |   log.js
+|   |               |   options.d.ts
+|   |               |   public-api.d.ts
+|   |               |   public-api.js
+|   |               |   test-events.d.ts
+|   |               |   test-events.js
+|   |               |   util.d.ts
+|   |               |   util.js
+|   |               |   visit.d.ts
+|   |               |   visit.js
+|   |               |   
+|   |               +---compose
+|   |               |       compose-collection.d.ts
+|   |               |       compose-collection.js
+|   |               |       compose-doc.d.ts
+|   |               |       compose-doc.js
+|   |               |       compose-node.d.ts
+|   |               |       compose-node.js
+|   |               |       compose-scalar.d.ts
+|   |               |       compose-scalar.js
+|   |               |       composer.d.ts
+|   |               |       composer.js
+|   |               |       resolve-block-map.d.ts
+|   |               |       resolve-block-map.js
+|   |               |       resolve-block-scalar.d.ts
+|   |               |       resolve-block-scalar.js
+|   |               |       resolve-block-seq.d.ts
+|   |               |       resolve-block-seq.js
+|   |               |       resolve-end.d.ts
+|   |               |       resolve-end.js
+|   |               |       resolve-flow-collection.d.ts
+|   |               |       resolve-flow-collection.js
+|   |               |       resolve-flow-scalar.d.ts
+|   |               |       resolve-flow-scalar.js
+|   |               |       resolve-props.d.ts
+|   |               |       resolve-props.js
+|   |               |       util-contains-newline.d.ts
+|   |               |       util-contains-newline.js
+|   |               |       util-empty-scalar-position.d.ts
+|   |               |       util-empty-scalar-position.js
+|   |               |       util-flow-indent-check.d.ts
+|   |               |       util-flow-indent-check.js
+|   |               |       util-map-includes.d.ts
+|   |               |       util-map-includes.js
+|   |               |       
+|   |               +---doc
+|   |               |       anchors.d.ts
+|   |               |       anchors.js
+|   |               |       applyReviver.d.ts
+|   |               |       applyReviver.js
+|   |               |       createNode.d.ts
+|   |               |       createNode.js
+|   |               |       directives.d.ts
+|   |               |       directives.js
+|   |               |       Document.d.ts
+|   |               |       Document.js
+|   |               |       
+|   |               +---nodes
+|   |               |       addPairToJSMap.d.ts
+|   |               |       addPairToJSMap.js
+|   |               |       Alias.d.ts
+|   |               |       Alias.js
+|   |               |       Collection.d.ts
+|   |               |       Collection.js
+|   |               |       identity.d.ts
+|   |               |       identity.js
+|   |               |       Node.d.ts
+|   |               |       Node.js
+|   |               |       Pair.d.ts
+|   |               |       Pair.js
+|   |               |       Scalar.d.ts
+|   |               |       Scalar.js
+|   |               |       toJS.d.ts
+|   |               |       toJS.js
+|   |               |       YAMLMap.d.ts
+|   |               |       YAMLMap.js
+|   |               |       YAMLSeq.d.ts
+|   |               |       YAMLSeq.js
+|   |               |       
+|   |               +---parse
+|   |               |       cst-scalar.d.ts
+|   |               |       cst-scalar.js
+|   |               |       cst-stringify.d.ts
+|   |               |       cst-stringify.js
+|   |               |       cst-visit.d.ts
+|   |               |       cst-visit.js
+|   |               |       cst.d.ts
+|   |               |       cst.js
+|   |               |       lexer.d.ts
+|   |               |       lexer.js
+|   |               |       line-counter.d.ts
+|   |               |       line-counter.js
+|   |               |       parser.d.ts
+|   |               |       parser.js
+|   |               |       
+|   |               +---schema
+|   |               |   |   json-schema.d.ts
+|   |               |   |   Schema.d.ts
+|   |               |   |   Schema.js
+|   |               |   |   tags.d.ts
+|   |               |   |   tags.js
+|   |               |   |   types.d.ts
+|   |               |   |   
+|   |               |   +---common
+|   |               |   |       map.d.ts
+|   |               |   |       map.js
+|   |               |   |       null.d.ts
+|   |               |   |       null.js
+|   |               |   |       seq.d.ts
+|   |               |   |       seq.js
+|   |               |   |       string.d.ts
+|   |               |   |       string.js
+|   |               |   |       
+|   |               |   +---core
+|   |               |   |       bool.d.ts
+|   |               |   |       bool.js
+|   |               |   |       float.d.ts
+|   |               |   |       float.js
+|   |               |   |       int.d.ts
+|   |               |   |       int.js
+|   |               |   |       schema.d.ts
+|   |               |   |       schema.js
+|   |               |   |       
+|   |               |   +---json
+|   |               |   |       schema.d.ts
+|   |               |   |       schema.js
+|   |               |   |       
+|   |               |   \---yaml-1.1
+|   |               |           binary.d.ts
+|   |               |           binary.js
+|   |               |           bool.d.ts
+|   |               |           bool.js
+|   |               |           float.d.ts
+|   |               |           float.js
+|   |               |           int.d.ts
+|   |               |           int.js
+|   |               |           merge.d.ts
+|   |               |           merge.js
+|   |               |           omap.d.ts
+|   |               |           omap.js
+|   |               |           pairs.d.ts
+|   |               |           pairs.js
+|   |               |           schema.d.ts
+|   |               |           schema.js
+|   |               |           set.d.ts
+|   |               |           set.js
+|   |               |           timestamp.d.ts
+|   |               |           timestamp.js
+|   |               |           
+|   |               \---stringify
+|   |                       foldFlowLines.d.ts
+|   |                       foldFlowLines.js
+|   |                       stringify.d.ts
+|   |                       stringify.js
+|   |                       stringifyCollection.d.ts
+|   |                       stringifyCollection.js
+|   |                       stringifyComment.d.ts
+|   |                       stringifyComment.js
+|   |                       stringifyDocument.d.ts
+|   |                       stringifyDocument.js
+|   |                       stringifyNumber.d.ts
+|   |                       stringifyNumber.js
+|   |                       stringifyPair.d.ts
+|   |                       stringifyPair.js
+|   |                       stringifyString.d.ts
+|   |                       stringifyString.js
+|   |                       
 |   +---vite-plugin-pwa
 |   |   |   client.d.ts
 |   |   |   index.d.ts
@@ -77951,96 +78289,631 @@ C:.
 |   |   |   vitest.mjs
 |   |   |   workers.d.ts
 |   |   |   
-|   |   \---dist
-|   |       |   browser.d.ts
-|   |       |   browser.js
-|   |       |   cli.js
-|   |       |   config.cjs
-|   |       |   config.d.ts
-|   |       |   config.js
-|   |       |   coverage.d.ts
-|   |       |   coverage.js
-|   |       |   environments.d.ts
-|   |       |   environments.js
-|   |       |   execute.d.ts
-|   |       |   execute.js
-|   |       |   index.d.ts
-|   |       |   index.js
-|   |       |   mocker.d.ts
-|   |       |   mocker.js
-|   |       |   node.d.ts
-|   |       |   node.js
-|   |       |   path.js
-|   |       |   reporters.d.ts
-|   |       |   reporters.js
-|   |       |   runners.d.ts
-|   |       |   runners.js
-|   |       |   snapshot.d.ts
-|   |       |   snapshot.js
-|   |       |   spy.js
-|   |       |   suite.d.ts
-|   |       |   suite.js
-|   |       |   utils.d.ts
-|   |       |   utils.js
-|   |       |   worker.js
-|   |       |   workers.d.ts
-|   |       |   workers.js
-|   |       |   
-|   |       +---chunks
-|   |       |       base.DslwPSCy.js
-|   |       |       benchmark.BoF7jW0Q.js
-|   |       |       benchmark.d.BwvBVTda.d.ts
-|   |       |       cac.BN2e7cE1.js
-|   |       |       cli-api.Bti1vevt.js
-|   |       |       config.d.UqE-KR0o.d.ts
-|   |       |       console.K1NMVOSc.js
-|   |       |       constants.BZZyIeIE.js
-|   |       |       coverage.0iPg4Wrz.js
-|   |       |       coverage.87S59-Sl.js
-|   |       |       coverage.d.S9RMNXIe.d.ts
-|   |       |       creator.CuL7xDWI.js
-|   |       |       date.CDOsz-HY.js
-|   |       |       defaults.DSxsTG0h.js
-|   |       |       env.Dq0hM4Xv.js
-|   |       |       environment.d.Dmw5ulng.d.ts
-|   |       |       execute.BpmIjFTD.js
-|   |       |       git.DXfdBEfR.js
-|   |       |       global.d.CXRAxnWc.d.ts
-|   |       |       globals.CZAEe_Gf.js
-|   |       |       index.B0uVAVvx.js
-|   |       |       index.Bw6JxgX8.js
-|   |       |       index.CJ0plNrh.js
-|   |       |       index.Cu2UlluP.js
-|   |       |       index.DBIGubLC.js
-|   |       |       index.De2FqGmR.js
-|   |       |       index.DFXFpH3w.js
-|   |       |       inspector.DbDkSkFn.js
-|   |       |       mocker.d.BE_2ls6u.d.ts
-|   |       |       node.3xsWotC9.js
-|   |       |       reporters.d.DG9VKi4m.d.ts
-|   |       |       rpc.D9_013TY.js
-|   |       |       run-once.Dimr7O9f.js
-|   |       |       runBaseTests.BV8m0B-u.js
-|   |       |       setup-common.AQcDs321.js
-|   |       |       suite.d.FvehnV49.d.ts
-|   |       |       typechecker.DYQbn8uK.js
-|   |       |       utils.BfxieIyZ.js
-|   |       |       utils.Cc45eY3L.js
-|   |       |       utils.CgTj3MsC.js
-|   |       |       vi.ClIskdbk.js
-|   |       |       vite.d.D3ndlJcw.d.ts
-|   |       |       vm.CuLHT1BG.js
-|   |       |       worker.d.C-KN07Ls.d.ts
-|   |       |       worker.d.CHGSOG0s.d.ts
-|   |       |       _commonjsHelpers.BFTU3MAI.js
+|   |   +---dist
+|   |   |   |   browser.d.ts
+|   |   |   |   browser.js
+|   |   |   |   cli.js
+|   |   |   |   config.cjs
+|   |   |   |   config.d.ts
+|   |   |   |   config.js
+|   |   |   |   coverage.d.ts
+|   |   |   |   coverage.js
+|   |   |   |   environments.d.ts
+|   |   |   |   environments.js
+|   |   |   |   execute.d.ts
+|   |   |   |   execute.js
+|   |   |   |   index.d.ts
+|   |   |   |   index.js
+|   |   |   |   mocker.d.ts
+|   |   |   |   mocker.js
+|   |   |   |   node.d.ts
+|   |   |   |   node.js
+|   |   |   |   path.js
+|   |   |   |   reporters.d.ts
+|   |   |   |   reporters.js
+|   |   |   |   runners.d.ts
+|   |   |   |   runners.js
+|   |   |   |   snapshot.d.ts
+|   |   |   |   snapshot.js
+|   |   |   |   spy.js
+|   |   |   |   suite.d.ts
+|   |   |   |   suite.js
+|   |   |   |   utils.d.ts
+|   |   |   |   utils.js
+|   |   |   |   worker.js
+|   |   |   |   workers.d.ts
+|   |   |   |   workers.js
+|   |   |   |   
+|   |   |   +---chunks
+|   |   |   |       base.DslwPSCy.js
+|   |   |   |       benchmark.BoF7jW0Q.js
+|   |   |   |       benchmark.d.BwvBVTda.d.ts
+|   |   |   |       cac.BN2e7cE1.js
+|   |   |   |       cli-api.Bti1vevt.js
+|   |   |   |       config.d.UqE-KR0o.d.ts
+|   |   |   |       console.K1NMVOSc.js
+|   |   |   |       constants.BZZyIeIE.js
+|   |   |   |       coverage.0iPg4Wrz.js
+|   |   |   |       coverage.87S59-Sl.js
+|   |   |   |       coverage.d.S9RMNXIe.d.ts
+|   |   |   |       creator.CuL7xDWI.js
+|   |   |   |       date.CDOsz-HY.js
+|   |   |   |       defaults.DSxsTG0h.js
+|   |   |   |       env.Dq0hM4Xv.js
+|   |   |   |       environment.d.Dmw5ulng.d.ts
+|   |   |   |       execute.BpmIjFTD.js
+|   |   |   |       git.DXfdBEfR.js
+|   |   |   |       global.d.CXRAxnWc.d.ts
+|   |   |   |       globals.CZAEe_Gf.js
+|   |   |   |       index.B0uVAVvx.js
+|   |   |   |       index.Bw6JxgX8.js
+|   |   |   |       index.CJ0plNrh.js
+|   |   |   |       index.Cu2UlluP.js
+|   |   |   |       index.DBIGubLC.js
+|   |   |   |       index.De2FqGmR.js
+|   |   |   |       index.DFXFpH3w.js
+|   |   |   |       inspector.DbDkSkFn.js
+|   |   |   |       mocker.d.BE_2ls6u.d.ts
+|   |   |   |       node.3xsWotC9.js
+|   |   |   |       reporters.d.DG9VKi4m.d.ts
+|   |   |   |       rpc.D9_013TY.js
+|   |   |   |       run-once.Dimr7O9f.js
+|   |   |   |       runBaseTests.BV8m0B-u.js
+|   |   |   |       setup-common.AQcDs321.js
+|   |   |   |       suite.d.FvehnV49.d.ts
+|   |   |   |       typechecker.DYQbn8uK.js
+|   |   |   |       utils.BfxieIyZ.js
+|   |   |   |       utils.Cc45eY3L.js
+|   |   |   |       utils.CgTj3MsC.js
+|   |   |   |       vi.ClIskdbk.js
+|   |   |   |       vite.d.D3ndlJcw.d.ts
+|   |   |   |       vm.CuLHT1BG.js
+|   |   |   |       worker.d.C-KN07Ls.d.ts
+|   |   |   |       worker.d.CHGSOG0s.d.ts
+|   |   |   |       _commonjsHelpers.BFTU3MAI.js
+|   |   |   |       
+|   |   |   \---workers
+|   |   |           forks.js
+|   |   |           runVmTests.js
+|   |   |           threads.js
+|   |   |           vmForks.js
+|   |   |           vmThreads.js
+|   |   |           
+|   |   \---node_modules
+|   |       +---.bin
+|   |       |       esbuild
+|   |       |       esbuild.cmd
+|   |       |       esbuild.ps1
+|   |       |       rollup
+|   |       |       rollup.cmd
+|   |       |       rollup.ps1
+|   |       |       vite
+|   |       |       vite.cmd
+|   |       |       vite.ps1
+|   |       |       yaml
+|   |       |       yaml.cmd
+|   |       |       yaml.ps1
 |   |       |       
-|   |       \---workers
-|   |               forks.js
-|   |               runVmTests.js
-|   |               threads.js
-|   |               vmForks.js
-|   |               vmThreads.js
-|   |               
+|   |       +---@esbuild
+|   |       |   \---win32-x64
+|   |       |           esbuild.exe
+|   |       |           package.json
+|   |       |           README.md
+|   |       |           
+|   |       +---@vitest
+|   |       |   \---mocker
+|   |       |       |   LICENSE
+|   |       |       |   package.json
+|   |       |       |   README.md
+|   |       |       |   
+|   |       |       \---dist
+|   |       |               auto-register.d.ts
+|   |       |               auto-register.js
+|   |       |               browser.d.ts
+|   |       |               browser.js
+|   |       |               chunk-interceptor-native.js
+|   |       |               chunk-mocker.js
+|   |       |               chunk-pathe.M-eThtNZ.js
+|   |       |               chunk-registry.js
+|   |       |               chunk-utils.js
+|   |       |               index.d.ts
+|   |       |               index.js
+|   |       |               mocker.d-B3zjcR_8.d.ts
+|   |       |               node.d.ts
+|   |       |               node.js
+|   |       |               redirect.d.ts
+|   |       |               redirect.js
+|   |       |               register.d.ts
+|   |       |               register.js
+|   |       |               registry.d-D765pazg.d.ts
+|   |       |               types.d-D_aRZRdy.d.ts
+|   |       |               
+|   |       +---esbuild
+|   |       |   |   install.js
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   +---bin
+|   |       |   |       esbuild
+|   |       |   |       
+|   |       |   \---lib
+|   |       |           main.d.ts
+|   |       |           main.js
+|   |       |           
+|   |       +---estree-walker
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   +---src
+|   |       |   |       async.js
+|   |       |   |       index.js
+|   |       |   |       sync.js
+|   |       |   |       walker.js
+|   |       |   |       
+|   |       |   \---types
+|   |       |           async.d.ts
+|   |       |           index.d.ts
+|   |       |           sync.d.ts
+|   |       |           walker.d.ts
+|   |       |           
+|   |       +---fdir
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---dist
+|   |       |       |   index.d.ts
+|   |       |       |   index.js
+|   |       |       |   optimizer.d.ts
+|   |       |       |   optimizer.js
+|   |       |       |   types.d.ts
+|   |       |       |   types.js
+|   |       |       |   utils.d.ts
+|   |       |       |   utils.js
+|   |       |       |   
+|   |       |       +---api
+|   |       |       |   |   async.d.ts
+|   |       |       |   |   async.js
+|   |       |       |   |   counter.d.ts
+|   |       |       |   |   counter.js
+|   |       |       |   |   queue.d.ts
+|   |       |       |   |   queue.js
+|   |       |       |   |   sync.d.ts
+|   |       |       |   |   sync.js
+|   |       |       |   |   walker.d.ts
+|   |       |       |   |   walker.js
+|   |       |       |   |   
+|   |       |       |   \---functions
+|   |       |       |           get-array.d.ts
+|   |       |       |           get-array.js
+|   |       |       |           group-files.d.ts
+|   |       |       |           group-files.js
+|   |       |       |           invoke-callback.d.ts
+|   |       |       |           invoke-callback.js
+|   |       |       |           is-recursive-symlink.d.ts
+|   |       |       |           is-recursive-symlink.js
+|   |       |       |           join-path.d.ts
+|   |       |       |           join-path.js
+|   |       |       |           push-directory.d.ts
+|   |       |       |           push-directory.js
+|   |       |       |           push-file.d.ts
+|   |       |       |           push-file.js
+|   |       |       |           resolve-symlink.d.ts
+|   |       |       |           resolve-symlink.js
+|   |       |       |           walk-directory.d.ts
+|   |       |       |           walk-directory.js
+|   |       |       |           
+|   |       |       \---builder
+|   |       |               api-builder.d.ts
+|   |       |               api-builder.js
+|   |       |               index.d.ts
+|   |       |               index.js
+|   |       |               
+|   |       +---magic-string
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---dist
+|   |       |           magic-string.cjs.d.ts
+|   |       |           magic-string.cjs.js
+|   |       |           magic-string.cjs.js.map
+|   |       |           magic-string.es.d.mts
+|   |       |           magic-string.es.mjs
+|   |       |           magic-string.es.mjs.map
+|   |       |           magic-string.umd.js
+|   |       |           magic-string.umd.js.map
+|   |       |           
+|   |       +---picomatch
+|   |       |   |   index.js
+|   |       |   |   LICENSE
+|   |       |   |   package.json
+|   |       |   |   posix.js
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---lib
+|   |       |           constants.js
+|   |       |           parse.js
+|   |       |           picomatch.js
+|   |       |           scan.js
+|   |       |           utils.js
+|   |       |           
+|   |       +---rollup
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   \---dist
+|   |       |       |   getLogFilter.d.ts
+|   |       |       |   getLogFilter.js
+|   |       |       |   loadConfigFile.d.ts
+|   |       |       |   loadConfigFile.js
+|   |       |       |   native.js
+|   |       |       |   parseAst.d.ts
+|   |       |       |   parseAst.js
+|   |       |       |   rollup.d.ts
+|   |       |       |   rollup.js
+|   |       |       |   
+|   |       |       +---bin
+|   |       |       |       rollup
+|   |       |       |       
+|   |       |       +---es
+|   |       |       |   |   getLogFilter.js
+|   |       |       |   |   package.json
+|   |       |       |   |   parseAst.js
+|   |       |       |   |   rollup.js
+|   |       |       |   |   
+|   |       |       |   \---shared
+|   |       |       |           node-entry.js
+|   |       |       |           parseAst.js
+|   |       |       |           watch.js
+|   |       |       |           
+|   |       |       \---shared
+|   |       |               fsevents-importer.js
+|   |       |               index.js
+|   |       |               loadConfigFile.js
+|   |       |               parseAst.js
+|   |       |               rollup.js
+|   |       |               watch-cli.js
+|   |       |               watch.js
+|   |       |               
+|   |       +---vite
+|   |       |   |   client.d.ts
+|   |       |   |   index.cjs
+|   |       |   |   index.d.cts
+|   |       |   |   LICENSE.md
+|   |       |   |   package.json
+|   |       |   |   README.md
+|   |       |   |   
+|   |       |   +---bin
+|   |       |   |       openChrome.applescript
+|   |       |   |       vite.js
+|   |       |   |       
+|   |       |   +---dist
+|   |       |   |   +---client
+|   |       |   |   |       client.mjs
+|   |       |   |   |       env.mjs
+|   |       |   |   |       
+|   |       |   |   +---node
+|   |       |   |   |   |   cli.js
+|   |       |   |   |   |   constants.js
+|   |       |   |   |   |   index.d.ts
+|   |       |   |   |   |   index.js
+|   |       |   |   |   |   module-runner.d.ts
+|   |       |   |   |   |   module-runner.js
+|   |       |   |   |   |   moduleRunnerTransport.d-DJ_mE5sf.d.ts
+|   |       |   |   |   |   
+|   |       |   |   |   \---chunks
+|   |       |   |   |           dep-3RmXg9uo.js
+|   |       |   |   |           dep-AiMcmC_f.js
+|   |       |   |   |           dep-CvfTChi5.js
+|   |       |   |   |           dep-DBxKXgDP.js
+|   |       |   |   |           dep-SgSik2vo.js
+|   |       |   |   |           
+|   |       |   |   \---node-cjs
+|   |       |   |           publicUtils.cjs
+|   |       |   |           
+|   |       |   +---misc
+|   |       |   |       false.js
+|   |       |   |       true.js
+|   |       |   |       
+|   |       |   \---types
+|   |       |       |   customEvent.d.ts
+|   |       |       |   hmrPayload.d.ts
+|   |       |       |   hot.d.ts
+|   |       |       |   import-meta.d.ts
+|   |       |       |   importGlob.d.ts
+|   |       |       |   importMeta.d.ts
+|   |       |       |   metadata.d.ts
+|   |       |       |   package.json
+|   |       |       |   
+|   |       |       \---internal
+|   |       |               cssPreprocessorOptions.d.ts
+|   |       |               lightningcssOptions.d.ts
+|   |       |               
+|   |       \---yaml
+|   |           |   bin.mjs
+|   |           |   LICENSE
+|   |           |   package.json
+|   |           |   README.md
+|   |           |   util.js
+|   |           |   
+|   |           +---browser
+|   |           |   |   index.js
+|   |           |   |   package.json
+|   |           |   |   
+|   |           |   \---dist
+|   |           |       |   errors.js
+|   |           |       |   index.js
+|   |           |       |   log.js
+|   |           |       |   public-api.js
+|   |           |       |   util.js
+|   |           |       |   visit.js
+|   |           |       |   
+|   |           |       +---compose
+|   |           |       |       compose-collection.js
+|   |           |       |       compose-doc.js
+|   |           |       |       compose-node.js
+|   |           |       |       compose-scalar.js
+|   |           |       |       composer.js
+|   |           |       |       resolve-block-map.js
+|   |           |       |       resolve-block-scalar.js
+|   |           |       |       resolve-block-seq.js
+|   |           |       |       resolve-end.js
+|   |           |       |       resolve-flow-collection.js
+|   |           |       |       resolve-flow-scalar.js
+|   |           |       |       resolve-props.js
+|   |           |       |       util-contains-newline.js
+|   |           |       |       util-empty-scalar-position.js
+|   |           |       |       util-flow-indent-check.js
+|   |           |       |       util-map-includes.js
+|   |           |       |       
+|   |           |       +---doc
+|   |           |       |       anchors.js
+|   |           |       |       applyReviver.js
+|   |           |       |       createNode.js
+|   |           |       |       directives.js
+|   |           |       |       Document.js
+|   |           |       |       
+|   |           |       +---nodes
+|   |           |       |       addPairToJSMap.js
+|   |           |       |       Alias.js
+|   |           |       |       Collection.js
+|   |           |       |       identity.js
+|   |           |       |       Node.js
+|   |           |       |       Pair.js
+|   |           |       |       Scalar.js
+|   |           |       |       toJS.js
+|   |           |       |       YAMLMap.js
+|   |           |       |       YAMLSeq.js
+|   |           |       |       
+|   |           |       +---parse
+|   |           |       |       cst-scalar.js
+|   |           |       |       cst-stringify.js
+|   |           |       |       cst-visit.js
+|   |           |       |       cst.js
+|   |           |       |       lexer.js
+|   |           |       |       line-counter.js
+|   |           |       |       parser.js
+|   |           |       |       
+|   |           |       +---schema
+|   |           |       |   |   Schema.js
+|   |           |       |   |   tags.js
+|   |           |       |   |   
+|   |           |       |   +---common
+|   |           |       |   |       map.js
+|   |           |       |   |       null.js
+|   |           |       |   |       seq.js
+|   |           |       |   |       string.js
+|   |           |       |   |       
+|   |           |       |   +---core
+|   |           |       |   |       bool.js
+|   |           |       |   |       float.js
+|   |           |       |   |       int.js
+|   |           |       |   |       schema.js
+|   |           |       |   |       
+|   |           |       |   +---json
+|   |           |       |   |       schema.js
+|   |           |       |   |       
+|   |           |       |   \---yaml-1.1
+|   |           |       |           binary.js
+|   |           |       |           bool.js
+|   |           |       |           float.js
+|   |           |       |           int.js
+|   |           |       |           merge.js
+|   |           |       |           omap.js
+|   |           |       |           pairs.js
+|   |           |       |           schema.js
+|   |           |       |           set.js
+|   |           |       |           timestamp.js
+|   |           |       |           
+|   |           |       \---stringify
+|   |           |               foldFlowLines.js
+|   |           |               stringify.js
+|   |           |               stringifyCollection.js
+|   |           |               stringifyComment.js
+|   |           |               stringifyDocument.js
+|   |           |               stringifyNumber.js
+|   |           |               stringifyPair.js
+|   |           |               stringifyString.js
+|   |           |               
+|   |           \---dist
+|   |               |   cli.d.ts
+|   |               |   cli.mjs
+|   |               |   errors.d.ts
+|   |               |   errors.js
+|   |               |   index.d.ts
+|   |               |   index.js
+|   |               |   log.d.ts
+|   |               |   log.js
+|   |               |   options.d.ts
+|   |               |   public-api.d.ts
+|   |               |   public-api.js
+|   |               |   test-events.d.ts
+|   |               |   test-events.js
+|   |               |   util.d.ts
+|   |               |   util.js
+|   |               |   visit.d.ts
+|   |               |   visit.js
+|   |               |   
+|   |               +---compose
+|   |               |       compose-collection.d.ts
+|   |               |       compose-collection.js
+|   |               |       compose-doc.d.ts
+|   |               |       compose-doc.js
+|   |               |       compose-node.d.ts
+|   |               |       compose-node.js
+|   |               |       compose-scalar.d.ts
+|   |               |       compose-scalar.js
+|   |               |       composer.d.ts
+|   |               |       composer.js
+|   |               |       resolve-block-map.d.ts
+|   |               |       resolve-block-map.js
+|   |               |       resolve-block-scalar.d.ts
+|   |               |       resolve-block-scalar.js
+|   |               |       resolve-block-seq.d.ts
+|   |               |       resolve-block-seq.js
+|   |               |       resolve-end.d.ts
+|   |               |       resolve-end.js
+|   |               |       resolve-flow-collection.d.ts
+|   |               |       resolve-flow-collection.js
+|   |               |       resolve-flow-scalar.d.ts
+|   |               |       resolve-flow-scalar.js
+|   |               |       resolve-props.d.ts
+|   |               |       resolve-props.js
+|   |               |       util-contains-newline.d.ts
+|   |               |       util-contains-newline.js
+|   |               |       util-empty-scalar-position.d.ts
+|   |               |       util-empty-scalar-position.js
+|   |               |       util-flow-indent-check.d.ts
+|   |               |       util-flow-indent-check.js
+|   |               |       util-map-includes.d.ts
+|   |               |       util-map-includes.js
+|   |               |       
+|   |               +---doc
+|   |               |       anchors.d.ts
+|   |               |       anchors.js
+|   |               |       applyReviver.d.ts
+|   |               |       applyReviver.js
+|   |               |       createNode.d.ts
+|   |               |       createNode.js
+|   |               |       directives.d.ts
+|   |               |       directives.js
+|   |               |       Document.d.ts
+|   |               |       Document.js
+|   |               |       
+|   |               +---nodes
+|   |               |       addPairToJSMap.d.ts
+|   |               |       addPairToJSMap.js
+|   |               |       Alias.d.ts
+|   |               |       Alias.js
+|   |               |       Collection.d.ts
+|   |               |       Collection.js
+|   |               |       identity.d.ts
+|   |               |       identity.js
+|   |               |       Node.d.ts
+|   |               |       Node.js
+|   |               |       Pair.d.ts
+|   |               |       Pair.js
+|   |               |       Scalar.d.ts
+|   |               |       Scalar.js
+|   |               |       toJS.d.ts
+|   |               |       toJS.js
+|   |               |       YAMLMap.d.ts
+|   |               |       YAMLMap.js
+|   |               |       YAMLSeq.d.ts
+|   |               |       YAMLSeq.js
+|   |               |       
+|   |               +---parse
+|   |               |       cst-scalar.d.ts
+|   |               |       cst-scalar.js
+|   |               |       cst-stringify.d.ts
+|   |               |       cst-stringify.js
+|   |               |       cst-visit.d.ts
+|   |               |       cst-visit.js
+|   |               |       cst.d.ts
+|   |               |       cst.js
+|   |               |       lexer.d.ts
+|   |               |       lexer.js
+|   |               |       line-counter.d.ts
+|   |               |       line-counter.js
+|   |               |       parser.d.ts
+|   |               |       parser.js
+|   |               |       
+|   |               +---schema
+|   |               |   |   json-schema.d.ts
+|   |               |   |   Schema.d.ts
+|   |               |   |   Schema.js
+|   |               |   |   tags.d.ts
+|   |               |   |   tags.js
+|   |               |   |   types.d.ts
+|   |               |   |   
+|   |               |   +---common
+|   |               |   |       map.d.ts
+|   |               |   |       map.js
+|   |               |   |       null.d.ts
+|   |               |   |       null.js
+|   |               |   |       seq.d.ts
+|   |               |   |       seq.js
+|   |               |   |       string.d.ts
+|   |               |   |       string.js
+|   |               |   |       
+|   |               |   +---core
+|   |               |   |       bool.d.ts
+|   |               |   |       bool.js
+|   |               |   |       float.d.ts
+|   |               |   |       float.js
+|   |               |   |       int.d.ts
+|   |               |   |       int.js
+|   |               |   |       schema.d.ts
+|   |               |   |       schema.js
+|   |               |   |       
+|   |               |   +---json
+|   |               |   |       schema.d.ts
+|   |               |   |       schema.js
+|   |               |   |       
+|   |               |   \---yaml-1.1
+|   |               |           binary.d.ts
+|   |               |           binary.js
+|   |               |           bool.d.ts
+|   |               |           bool.js
+|   |               |           float.d.ts
+|   |               |           float.js
+|   |               |           int.d.ts
+|   |               |           int.js
+|   |               |           merge.d.ts
+|   |               |           merge.js
+|   |               |           omap.d.ts
+|   |               |           omap.js
+|   |               |           pairs.d.ts
+|   |               |           pairs.js
+|   |               |           schema.d.ts
+|   |               |           schema.js
+|   |               |           set.d.ts
+|   |               |           set.js
+|   |               |           timestamp.d.ts
+|   |               |           timestamp.js
+|   |               |           
+|   |               \---stringify
+|   |                       foldFlowLines.d.ts
+|   |                       foldFlowLines.js
+|   |                       stringify.d.ts
+|   |                       stringify.js
+|   |                       stringifyCollection.d.ts
+|   |                       stringifyCollection.js
+|   |                       stringifyComment.d.ts
+|   |                       stringifyComment.js
+|   |                       stringifyDocument.d.ts
+|   |                       stringifyDocument.js
+|   |                       stringifyNumber.d.ts
+|   |                       stringifyNumber.js
+|   |                       stringifyPair.d.ts
+|   |                       stringifyPair.js
+|   |                       stringifyString.d.ts
+|   |                       stringifyString.js
+|   |                       
 |   +---w3c-xmlserializer
 |   |   |   LICENSE.md
 |   |   |   package.json
@@ -80328,286 +81201,75 @@ C:.
 |   |       yallist.js
 |   |       
 |   +---yaml
-|   |   |   bin.mjs
+|   |   |   index.d.ts
+|   |   |   index.js
 |   |   |   LICENSE
+|   |   |   map.js
 |   |   |   package.json
+|   |   |   pair.js
+|   |   |   parse-cst.d.ts
+|   |   |   parse-cst.js
 |   |   |   README.md
+|   |   |   scalar.js
+|   |   |   schema.js
+|   |   |   seq.js
+|   |   |   types.d.ts
+|   |   |   types.js
+|   |   |   types.mjs
+|   |   |   util.d.ts
 |   |   |   util.js
+|   |   |   util.mjs
 |   |   |   
 |   |   +---browser
 |   |   |   |   index.js
-|   |   |   |   package.json
+|   |   |   |   map.js
+|   |   |   |   pair.js
+|   |   |   |   parse-cst.js
+|   |   |   |   scalar.js
+|   |   |   |   schema.js
+|   |   |   |   seq.js
+|   |   |   |   types.js
+|   |   |   |   util.js
 |   |   |   |   
-|   |   |   \---dist
-|   |   |       |   errors.js
-|   |   |       |   index.js
-|   |   |       |   log.js
-|   |   |       |   public-api.js
-|   |   |       |   util.js
-|   |   |       |   visit.js
-|   |   |       |   
-|   |   |       +---compose
-|   |   |       |       compose-collection.js
-|   |   |       |       compose-doc.js
-|   |   |       |       compose-node.js
-|   |   |       |       compose-scalar.js
-|   |   |       |       composer.js
-|   |   |       |       resolve-block-map.js
-|   |   |       |       resolve-block-scalar.js
-|   |   |       |       resolve-block-seq.js
-|   |   |       |       resolve-end.js
-|   |   |       |       resolve-flow-collection.js
-|   |   |       |       resolve-flow-scalar.js
-|   |   |       |       resolve-props.js
-|   |   |       |       util-contains-newline.js
-|   |   |       |       util-empty-scalar-position.js
-|   |   |       |       util-flow-indent-check.js
-|   |   |       |       util-map-includes.js
-|   |   |       |       
-|   |   |       +---doc
-|   |   |       |       anchors.js
-|   |   |       |       applyReviver.js
-|   |   |       |       createNode.js
-|   |   |       |       directives.js
-|   |   |       |       Document.js
-|   |   |       |       
-|   |   |       +---nodes
-|   |   |       |       addPairToJSMap.js
-|   |   |       |       Alias.js
-|   |   |       |       Collection.js
-|   |   |       |       identity.js
-|   |   |       |       Node.js
-|   |   |       |       Pair.js
-|   |   |       |       Scalar.js
-|   |   |       |       toJS.js
-|   |   |       |       YAMLMap.js
-|   |   |       |       YAMLSeq.js
-|   |   |       |       
-|   |   |       +---parse
-|   |   |       |       cst-scalar.js
-|   |   |       |       cst-stringify.js
-|   |   |       |       cst-visit.js
-|   |   |       |       cst.js
-|   |   |       |       lexer.js
-|   |   |       |       line-counter.js
-|   |   |       |       parser.js
-|   |   |       |       
-|   |   |       +---schema
-|   |   |       |   |   Schema.js
-|   |   |       |   |   tags.js
-|   |   |       |   |   
-|   |   |       |   +---common
-|   |   |       |   |       map.js
-|   |   |       |   |       null.js
-|   |   |       |   |       seq.js
-|   |   |       |   |       string.js
-|   |   |       |   |       
-|   |   |       |   +---core
-|   |   |       |   |       bool.js
-|   |   |       |   |       float.js
-|   |   |       |   |       int.js
-|   |   |       |   |       schema.js
-|   |   |       |   |       
-|   |   |       |   +---json
-|   |   |       |   |       schema.js
-|   |   |       |   |       
-|   |   |       |   \---yaml-1.1
-|   |   |       |           binary.js
-|   |   |       |           bool.js
-|   |   |       |           float.js
-|   |   |       |           int.js
-|   |   |       |           merge.js
-|   |   |       |           omap.js
-|   |   |       |           pairs.js
-|   |   |       |           schema.js
-|   |   |       |           set.js
-|   |   |       |           timestamp.js
-|   |   |       |           
-|   |   |       \---stringify
-|   |   |               foldFlowLines.js
-|   |   |               stringify.js
-|   |   |               stringifyCollection.js
-|   |   |               stringifyComment.js
-|   |   |               stringifyDocument.js
-|   |   |               stringifyNumber.js
-|   |   |               stringifyPair.js
-|   |   |               stringifyString.js
-|   |   |               
-|   |   \---dist
-|   |       |   cli.d.ts
-|   |       |   cli.mjs
-|   |       |   errors.d.ts
-|   |       |   errors.js
-|   |       |   index.d.ts
-|   |       |   index.js
-|   |       |   log.d.ts
-|   |       |   log.js
-|   |       |   options.d.ts
-|   |       |   public-api.d.ts
-|   |       |   public-api.js
-|   |       |   test-events.d.ts
-|   |       |   test-events.js
-|   |       |   util.d.ts
-|   |       |   util.js
-|   |       |   visit.d.ts
-|   |       |   visit.js
-|   |       |   
-|   |       +---compose
-|   |       |       compose-collection.d.ts
-|   |       |       compose-collection.js
-|   |       |       compose-doc.d.ts
-|   |       |       compose-doc.js
-|   |       |       compose-node.d.ts
-|   |       |       compose-node.js
-|   |       |       compose-scalar.d.ts
-|   |       |       compose-scalar.js
-|   |       |       composer.d.ts
-|   |       |       composer.js
-|   |       |       resolve-block-map.d.ts
-|   |       |       resolve-block-map.js
-|   |       |       resolve-block-scalar.d.ts
-|   |       |       resolve-block-scalar.js
-|   |       |       resolve-block-seq.d.ts
-|   |       |       resolve-block-seq.js
-|   |       |       resolve-end.d.ts
-|   |       |       resolve-end.js
-|   |       |       resolve-flow-collection.d.ts
-|   |       |       resolve-flow-collection.js
-|   |       |       resolve-flow-scalar.d.ts
-|   |       |       resolve-flow-scalar.js
-|   |       |       resolve-props.d.ts
-|   |       |       resolve-props.js
-|   |       |       util-contains-newline.d.ts
-|   |       |       util-contains-newline.js
-|   |       |       util-empty-scalar-position.d.ts
-|   |       |       util-empty-scalar-position.js
-|   |       |       util-flow-indent-check.d.ts
-|   |       |       util-flow-indent-check.js
-|   |       |       util-map-includes.d.ts
-|   |       |       util-map-includes.js
-|   |       |       
-|   |       +---doc
-|   |       |       anchors.d.ts
-|   |       |       anchors.js
-|   |       |       applyReviver.d.ts
-|   |       |       applyReviver.js
-|   |       |       createNode.d.ts
-|   |       |       createNode.js
-|   |       |       directives.d.ts
-|   |       |       directives.js
-|   |       |       Document.d.ts
-|   |       |       Document.js
-|   |       |       
-|   |       +---nodes
-|   |       |       addPairToJSMap.d.ts
-|   |       |       addPairToJSMap.js
-|   |       |       Alias.d.ts
-|   |       |       Alias.js
-|   |       |       Collection.d.ts
-|   |       |       Collection.js
-|   |       |       identity.d.ts
-|   |       |       identity.js
-|   |       |       Node.d.ts
-|   |       |       Node.js
-|   |       |       Pair.d.ts
-|   |       |       Pair.js
-|   |       |       Scalar.d.ts
-|   |       |       Scalar.js
-|   |       |       toJS.d.ts
-|   |       |       toJS.js
-|   |       |       YAMLMap.d.ts
-|   |       |       YAMLMap.js
-|   |       |       YAMLSeq.d.ts
-|   |       |       YAMLSeq.js
-|   |       |       
-|   |       +---parse
-|   |       |       cst-scalar.d.ts
-|   |       |       cst-scalar.js
-|   |       |       cst-stringify.d.ts
-|   |       |       cst-stringify.js
-|   |       |       cst-visit.d.ts
-|   |       |       cst-visit.js
-|   |       |       cst.d.ts
-|   |       |       cst.js
-|   |       |       lexer.d.ts
-|   |       |       lexer.js
-|   |       |       line-counter.d.ts
-|   |       |       line-counter.js
-|   |       |       parser.d.ts
-|   |       |       parser.js
-|   |       |       
-|   |       +---schema
-|   |       |   |   json-schema.d.ts
-|   |       |   |   Schema.d.ts
-|   |       |   |   Schema.js
-|   |       |   |   tags.d.ts
-|   |       |   |   tags.js
-|   |       |   |   types.d.ts
-|   |       |   |   
-|   |       |   +---common
-|   |       |   |       map.d.ts
-|   |       |   |       map.js
-|   |       |   |       null.d.ts
-|   |       |   |       null.js
-|   |       |   |       seq.d.ts
-|   |       |   |       seq.js
-|   |       |   |       string.d.ts
-|   |       |   |       string.js
-|   |       |   |       
-|   |       |   +---core
-|   |       |   |       bool.d.ts
-|   |       |   |       bool.js
-|   |       |   |       float.d.ts
-|   |       |   |       float.js
-|   |       |   |       int.d.ts
-|   |       |   |       int.js
-|   |       |   |       schema.d.ts
-|   |       |   |       schema.js
-|   |       |   |       
-|   |       |   +---json
-|   |       |   |       schema.d.ts
-|   |       |   |       schema.js
-|   |       |   |       
-|   |       |   \---yaml-1.1
-|   |       |           binary.d.ts
-|   |       |           binary.js
-|   |       |           bool.d.ts
-|   |       |           bool.js
-|   |       |           float.d.ts
-|   |       |           float.js
-|   |       |           int.d.ts
-|   |       |           int.js
-|   |       |           merge.d.ts
-|   |       |           merge.js
-|   |       |           omap.d.ts
-|   |       |           omap.js
-|   |       |           pairs.d.ts
-|   |       |           pairs.js
-|   |       |           schema.d.ts
-|   |       |           schema.js
-|   |       |           set.d.ts
-|   |       |           set.js
-|   |       |           timestamp.d.ts
-|   |       |           timestamp.js
-|   |       |           
-|   |       \---stringify
-|   |               foldFlowLines.d.ts
-|   |               foldFlowLines.js
-|   |               stringify.d.ts
-|   |               stringify.js
-|   |               stringifyCollection.d.ts
-|   |               stringifyCollection.js
-|   |               stringifyComment.d.ts
-|   |               stringifyComment.js
-|   |               stringifyDocument.d.ts
-|   |               stringifyDocument.js
-|   |               stringifyNumber.d.ts
-|   |               stringifyNumber.js
-|   |               stringifyPair.d.ts
-|   |               stringifyPair.js
-|   |               stringifyString.d.ts
-|   |               stringifyString.js
-|   |               
+|   |   |   +---dist
+|   |   |   |       index.js
+|   |   |   |       legacy-exports.js
+|   |   |   |       package.json
+|   |   |   |       parse-cst.js
+|   |   |   |       PlainValue-b8036b75.js
+|   |   |   |       resolveSeq-492ab440.js
+|   |   |   |       Schema-e94716c8.js
+|   |   |   |       types.js
+|   |   |   |       util.js
+|   |   |   |       warnings-df54cb69.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |           binary.js
+|   |   |           omap.js
+|   |   |           pairs.js
+|   |   |           set.js
+|   |   |           timestamp.js
+|   |   |           
+|   |   +---dist
+|   |   |       Document-9b4560a1.js
+|   |   |       index.js
+|   |   |       legacy-exports.js
+|   |   |       parse-cst.js
+|   |   |       PlainValue-ec8e588e.js
+|   |   |       resolveSeq-d03cb037.js
+|   |   |       Schema-88e323a7.js
+|   |   |       test-events.js
+|   |   |       types.js
+|   |   |       util.js
+|   |   |       warnings-1000a372.js
+|   |   |       
+|   |   \---types
+|   |           binary.js
+|   |           omap.js
+|   |           pairs.js
+|   |           set.js
+|   |           timestamp.js
+|   |           
 |   +---yargs
 |   |   |   browser.d.ts
 |   |   |   browser.mjs
