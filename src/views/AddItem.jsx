@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { addItem } from '../api/firebase.js';
+import { useState, useEffect } from 'react'; // Добавил useEffect
+import { addItem } from '../api'; // Теперь правильно импортирует из api/index.js -> api/firebase.js
 import {
 	Button,
 	FormControl,
@@ -9,108 +9,180 @@ import {
 	FormLabel,
 	TextField,
 	Box,
+	Typography, // Для сообщений
+	CircularProgress, // Для индикатора загрузки
 } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // Добавил useNavigate
 
 export function AddItem({ listToken, data }) {
-	const { state } = useLocation(); // React Router DOM state - persisted between List and Add-Item routing - leveraged to quickly add a non-existing item the user attemped to search for.
+	// 'data' теперь будет передаваться из App.jsx
+	const { state } = useLocation();
 	const itemUserSearchedFor = state?.itemUserSearchedFor;
-	const [itemName, setItemName] = useState(itemUserSearchedFor || ''); // If Add-Item was hailed from failed search attempt, initiate itemName to the item the user attempted to search for. Else, to ''.
-	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7);
-	const [error, setError] = useState(false);
+	const [itemName, setItemName] = useState(itemUserSearchedFor || '');
+	const [daysUntilNextPurchase, setDaysUntilNextPurchase] = useState(7); // По умолчанию 'soon'
+	// const [error, setError] = useState(false); // Можно удалить, если используем userAlertMessage
 	const [userAlertMessage, setUserAlertMessage] = useState('');
-	const normalizedItemNameRegex = /[\s\W]|_+|s$/g; //Targets all spaces, non-letter characters, and 's' character at the end of the string
+	const [isSubmitting, setIsSubmitting] = useState(false); // Для индикатора загрузки
+	const navigate = useNavigate(); // Для перенаправления после добавления
+
+	// Если itemUserSearchedFor есть, устанавливаем его в itemName при первом рендере
+	useEffect(() => {
+		if (itemUserSearchedFor) {
+			setItemName(itemUserSearchedFor);
+		}
+	}, [itemUserSearchedFor]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const normalizedItemName = itemName
+		setUserAlertMessage(''); // Сбрасываем предыдущие сообщения
+		setIsSubmitting(true); // Начинаем отправку
+
+		const normalizedItemNameRegex = /[\\s\\W]|_+|s$/g;
+		const trimmedItemName = itemName.trim(); // Убираем пробелы в начале и конце
+		const normalizedItemName = trimmedItemName
 			.toLowerCase()
 			.replace(normalizedItemNameRegex, '');
 
-		if (normalizedItemName === '') {
+		if (trimmedItemName === '') {
 			setUserAlertMessage('Please enter an item name.');
+			setIsSubmitting(false);
 			return;
 		}
 
-		for (const item of data) {
-			const existingItem = item.name;
-			const updatedExistingItem = existingItem
-				.toLowerCase()
-				.replace(normalizedItemNameRegex, '');
+		// Проверка на существующий элемент (убедись, что 'data' действительно содержит актуальные данные списка)
+		// Для этой проверки 'data' должен быть массивом объектов item из Firestore
+		const itemExists =
+			data && Array.isArray(data)
+				? data.find(
+						(item) =>
+							item.normalizedName === normalizedItemName || // Проверка по нормализованному имени
+							(item.name &&
+								item.name.toLowerCase().replace(normalizedItemNameRegex, '') === // Дополнительная проверка, если normalizedName нет
+									normalizedItemName),
+				  )
+				: false;
 
-			if (normalizedItemName === updatedExistingItem) {
-				setUserAlertMessage(
-					`The item '${existingItem}' is already on your list.`,
-				);
-				return;
-			}
+		if (itemExists) {
+			setUserAlertMessage(
+				`"${trimmedItemName}" already exists in your shopping list.`,
+			);
+			setIsSubmitting(false);
+			return;
 		}
+
 		try {
 			await addItem(listToken, {
-				itemName,
+				itemName: trimmedItemName, // Передаем очищенное имя
 				daysUntilNextPurchase,
 			});
-			setUserAlertMessage(`${itemName} has been added to your list.`);
-			setError(false);
-		} catch (e) {
-			setError(true);
-			setUserAlertMessage('');
+			setUserAlertMessage(`"${trimmedItemName}" was successfully added!`);
+			setItemName(''); // Очищаем поле после успешного добавления
+			// setDaysUntilNextPurchase(7); // Можно сбросить на значение по умолчанию
+			// navigate('/list'); // Опционально: перенаправляем на страницу списка
+		} catch (error) {
+			console.error('Error in AddItem handleSubmit:', error);
+			setUserAlertMessage(
+				`Oops! Something went wrong. Could not add item. ${error.message}`,
+			);
+		} finally {
+			setIsSubmitting(false); // Завершаем отправку в любом случае
 		}
 	};
-	// TODO: implement clear input after user adds item to list
-	return (
-		<>
-			<Box display="flex" justifyContent="center" minHeight="100vh">
-				<FormControl>
-					<h2>Add an item to your shopping list:</h2>
-					<TextField
-						id="item-name-input"
-						label="Item name"
-						variant="outlined"
-						defaultValue={itemUserSearchedFor || null}
-						onChange={(e) => setItemName(e.target.value)}
-					/>
-					<RadioGroup>
-						<FormLabel>How soon will you buy this item?</FormLabel>
-						<FormControlLabel
-							value="soon"
-							control={<Radio />}
-							label="Soon"
-							onChange={() => setDaysUntilNextPurchase(7)}
-							checked={daysUntilNextPurchase === 7}
-						/>
-						<FormControlLabel
-							value="kind of soon"
-							control={<Radio />}
-							label="Kind of soon"
-							onChange={() => setDaysUntilNextPurchase(14)}
-							checked={daysUntilNextPurchase === 14}
-						/>
-						<FormControlLabel
-							value="not soon"
-							control={<Radio />}
-							label="Not soon"
-							onChange={() => setDaysUntilNextPurchase(30)}
-							checked={daysUntilNextPurchase === 30}
-						/>
-					</RadioGroup>
 
-					<Button
-						type="submit"
-						variant="contained"
-						size="large"
-						onClick={handleSubmit}
-					>
-						Add item
-					</Button>
-					{/* TODO: we could change item added message to a toast message, alert, timeout or use third-party library for this message. */}
-					{error ? (
-						<p>Oh no, something went wrong.</p>
-					) : (
-						<p>{userAlertMessage}</p>
-					)}
-				</FormControl>
-			</Box>
-		</>
+	return (
+		// Обернем в Box для лучшего контроля над шириной и выравниванием
+		<Box
+			component="form" // Используем form для семантики
+			onSubmit={handleSubmit} // Привязываем handleSubmit к событию onSubmit формы
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: 2, // Отступы между элементами
+				width: '100%',
+				maxWidth: '500px', // Ограничим максимальную ширину формы
+				p: { xs: 2, sm: 3 }, // Паддинги
+				border: (theme) => `1px solid ${theme.palette.divider}`,
+				borderRadius: (theme) => theme.shape.borderRadius,
+				boxShadow: (theme) => theme.shadows[2],
+				bgcolor: 'background.paper',
+			}}
+		>
+			<Typography variant="h5" component="h2" gutterBottom textAlign="center">
+				Add Item to List
+			</Typography>
+
+			<TextField
+				id="item-name-input"
+				label="Item name"
+				variant="outlined"
+				value={itemName} // Управляемый компонент
+				onChange={(e) => {
+					setItemName(e.target.value);
+					if (userAlertMessage) setUserAlertMessage(''); // Сбрасываем сообщение при вводе
+				}}
+				required // Делаем поле обязательным
+				fullWidth // Занимает всю доступную ширину
+				disabled={isSubmitting}
+			/>
+			<FormControl component="fieldset" disabled={isSubmitting}>
+				{' '}
+				{/* Обертка для RadioGroup */}
+				<FormLabel component="legend">
+					How soon will you buy this item?
+				</FormLabel>
+				<RadioGroup
+					row // Расположим радиокнопки в ряд для экономии места
+					aria-label="days-until-next-purchase"
+					name="days-until-next-purchase-group"
+					value={daysUntilNextPurchase}
+					onChange={(e) =>
+						setDaysUntilNextPurchase(parseInt(e.target.value, 10))
+					}
+				>
+					<FormControlLabel
+						value={7} // Значение теперь число
+						control={<Radio />}
+						label="Soon (7 days)"
+					/>
+					<FormControlLabel
+						value={14}
+						control={<Radio />}
+						label="Kind of soon (14 days)"
+					/>
+					<FormControlLabel
+						value={30}
+						control={<Radio />}
+						label="Not soon (30 days)"
+					/>
+				</RadioGroup>
+			</FormControl>
+
+			{userAlertMessage && (
+				<Typography
+					color={
+						userAlertMessage.startsWith('Oops!') ? 'error' : 'success.main'
+					} // Цвет в зависимости от сообщения
+					sx={{ textAlign: 'center', mt: 1, mb: 1 }}
+				>
+					{userAlertMessage}
+				</Typography>
+			)}
+
+			<Button
+				type="submit" // type="submit" для формы
+				variant="contained"
+				color="primary" // Используем основной цвет темы
+				size="large"
+				disabled={isSubmitting || !itemName.trim()} // Кнопка неактивна, если идет отправка или имя пустое
+				fullWidth
+				sx={{ mt: 1 }} // Небольшой отступ сверху
+			>
+				{isSubmitting ? (
+					<CircularProgress size={24} color="inherit" />
+				) : (
+					'Add item'
+				)}
+			</Button>
+		</Box>
 	);
 }

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // Ensure React is imported
 import {
-	BrowserRouter as Router, // Переименовал для ясности, что это корневой Router
+	BrowserRouter as Router,
 	Routes,
 	Route,
 	Navigate,
@@ -9,46 +9,50 @@ import {
 } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
-import { getItemData, streamListItems } from './api';
+import { getItemData, streamListItems } from './api'; // getItemData is used
 import { useStateWithStorage } from './utils';
 import { ThemeProvider } from './theme/ThemeProvider';
 
-// Компонент-обертка для чтения токена из URL и установки его
+// Component-wrapper for reading token from URL and setting it
 function JoinListTokenSetter({ setListToken }) {
 	const { tokenFromUrl } = useParams();
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (tokenFromUrl) {
-			console.log('Token from URL:', tokenFromUrl);
+			// console.log('Token from URL:', tokenFromUrl);
 			setListToken(tokenFromUrl);
-			navigate('/list', { replace: true });
+			navigate('/list', { replace: true }); // Redirect to the list page
 		} else {
+			// If somehow landed on /join without a token, go home
 			navigate('/', { replace: true });
 		}
 	}, [tokenFromUrl, setListToken, navigate]);
 
-	return null;
+	return null; // This component does not render anything itself
 }
 
-
 export function App() {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState([]); // Holds the current list items
 	const [listToken, setListToken] = useStateWithStorage(
-		null,
-		'tcl-shopping-list-token',
+		null, // Default to no token
+		'tcl-shopping-list-token', // Key for localStorage
 	);
 
 	useEffect(() => {
 		if (!listToken) {
-			setData([]);
+			setData([]); // Clear data if no token
 			return;
 		}
-		const unsubscribe = streamListItems(listToken, (snapshot) => { // Сохраняем функцию отписки
-			const nextData = getItemData(snapshot);
+
+		// Subscribe to list items
+		const unsubscribe = streamListItems(listToken, (snapshot) => {
+			const nextData = snapshot.docs.map(getItemData); // Use getItemData for each doc
 			setData(nextData);
 		});
-		return unsubscribe; // Отписываемся при размонтировании или смене listToken
+
+		// Cleanup subscription on component unmount or when listToken changes
+		return () => unsubscribe();
 	}, [listToken]);
 
 	return (
@@ -56,20 +60,22 @@ export function App() {
 			<Router>
 				<Routes>
 					<Route
-						path="/join/:tokenFromUrl"
+						path="/join/:tokenFromUrl" // Route for joining a list via URL
 						element={<JoinListTokenSetter setListToken={setListToken} />}
 					/>
 					<Route
 						path="/"
-						element={<Layout listToken={listToken} setListToken={setListToken} />}
+						element={
+							<Layout listToken={listToken} setListToken={setListToken} />
+						} // Main layout
 					>
 						<Route
-							index
+							index // Default route for "/"
 							element={
 								listToken ? (
-									<Navigate to="/list" replace />
+									<Navigate to="/list" replace /> // If token exists, go to list
 								) : (
-									<Home setListToken={setListToken} />
+									<Home setListToken={setListToken} /> // Else, show Home page
 								)
 							}
 						/>
@@ -77,9 +83,9 @@ export function App() {
 							path="list"
 							element={
 								listToken ? (
-									<List data={data} listToken={listToken} />
+									<List data={data} listToken={listToken} /> // Pass data to List
 								) : (
-									<Navigate to="/" replace />
+									<Navigate to="/" replace /> // If no token, redirect to Home
 								)
 							}
 						/>
@@ -87,12 +93,14 @@ export function App() {
 							path="add-item"
 							element={
 								listToken ? (
-									<AddItem listToken={listToken} />
+									// Pass current list data to AddItem for duplicate checking
+									<AddItem listToken={listToken} data={data} />
 								) : (
-									<Navigate to="/" replace />
+									<Navigate to="/" replace /> // If no token, redirect to Home
 								)
 							}
 						/>
+						{/* Catch-all route for undefined paths, redirects to Home */}
 						<Route path="*" element={<Navigate to="/" replace />} />
 					</Route>
 				</Routes>
