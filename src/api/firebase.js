@@ -137,12 +137,13 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 /**
  * Helper function to extract item data from a Firestore document snapshot.
  */
+// Фрагмент из firebase_api_js_full_crud -> getItemData
 export function getItemData(doc) {
 	const data = doc.data();
 	if (!data) {
 		return { id: doc.id };
 	}
-	// Преобразуем Firestore Timestamps в JavaScript Date объекты при чтении
+	// Convert Firestore Timestamps to JavaScript Date objects
 	const dateCreated = data.dateCreated?.toDate
 		? data.dateCreated.toDate()
 		: null;
@@ -151,7 +152,7 @@ export function getItemData(doc) {
 		: null;
 	const dateNextPurchased = data.dateNextPurchased?.toDate
 		? data.dateNextPurchased.toDate()
-		: null;
+		: null; // ЭТО УЖЕ JS DATE
 
 	return {
 		id: doc.id,
@@ -159,7 +160,7 @@ export function getItemData(doc) {
 		normalizedName: data.normalizedName || normalizeItemName(data.name || ''),
 		dateCreated: dateCreated,
 		dateLastPurchased: dateLastPurchased,
-		dateNextPurchased: dateNextPurchased,
+		dateNextPurchased: dateNextPurchased, // ПЕРЕДАЕТСЯ КАК JS DATE
 		totalPurchases: data.totalPurchases || 0,
 	};
 }
