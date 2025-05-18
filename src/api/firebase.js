@@ -1,168 +1,270 @@
 import {
 	addDoc,
-	// deleteDoc, // Раскомментируй, если/когда будешь реализовывать удаление
+	deleteDoc,
 	collection,
 	onSnapshot,
 	getDocs,
-	// updateDoc, // Раскомментируй для updateItem
-	// doc,       // Раскомментируй для updateItem/deleteItem
-	// getDoc,    // Раскомментируй, если нужно получать один документ
+	updateDoc,
+	doc,
+	getDoc, // Нужен для получения документа перед обновлением
 } from 'firebase/firestore';
-import { db } from './config'; // Убедись, что config.js теперь использует переменные окружения!
+import { db } from './config';
 import {
-	getFutureDate /* ONE_DAY_IN_MILLISECONDS, CURRENT_DATE, getDaysBetweenDates */,
-} from '../utils'; // Закомментированы неиспользуемые пока
-// import { calculateEstimate } from '@the-collab-lab/shopping-list-utils'; // Если будешь использовать эту логику
+	getFutureDate,
+	getDaysBetweenDates, // Нужен для calculateEstimate
+	CURRENT_DATE, // Нужен для calculateEstimate
+	ONE_DAY_IN_MILLISECONDS, // Нужен для определения, был ли товар куплен недавно
+} from '../utils'; // Убедись, что все эти функции экспортируются из utils/index.js или utils/dates.js
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils'; // Эта утилита используется для "умного" списка
 
 /**
- * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
+ * Helper function to normalize item names for consistent checking.
+ */
+function normalizeItemName(itemName) {
+	if (typeof itemName !== 'string') return '';
+	return itemName
+		.trim()
+		.toLowerCase()
+		.replace(/[\s\W]|_+/g, '')
+		.replace(/s$/, '');
+}
+
+/**
+ * Subscribe to changes on a specific list in the Firestore database (listId),
+ * and run a callback (handleSuccess) every time a change happens.
  */
 export function streamListItems(listId, handleSuccess) {
-	if (!listId) {
+	if (!listId || typeof listId !== 'string') {
 		console.error(
-			'streamListItems: listId is undefined or null. Cannot stream items.',
+			'streamListItems: listId is invalid or missing. listId:',
+			listId,
 		);
-		return () => {}; // Возвращаем пустую функцию для отписки, чтобы не было ошибок
+		return () => {};
 	}
 	const listCollectionRef = collection(db, listId);
 	try {
-		return onSnapshot(listCollectionRef, handleSuccess, (error) => {
-			console.error('Error streaming list items for listId:', listId, error);
-			// Можно добавить обработку ошибки для пользователя, если нужно
-		});
+		return onSnapshot(
+			listCollectionRef,
+			(snapshot) => {
+				handleSuccess(snapshot);
+			},
+			(error) => {
+				console.error(
+					`Error streaming list items for listId "${listId}":`,
+					error,
+				);
+			},
+		);
 	} catch (error) {
-		console.error('Error setting up stream for listId:', listId, error);
+		console.error(`Failed to set up stream for listId "${listId}":`, error);
 		return () => {};
 	}
 }
 
 /**
  * Read all documents from a specific list in the Firestore database (listId) ONCE.
- * @param {string} listId The user's list token
- * @returns {Object[]} An array of objects representing the user's list.
- * @see https://firebase.google.com/docs/firestore/query-data/get-data
  */
 export async function getListItems(listId) {
-	if (!listId) {
-		console.error('getListItems: listId is undefined or null.');
+	if (!listId || typeof listId !== 'string') {
+		console.error(
+			'getListItems: listId is invalid or missing. listId:',
+			listId,
+		);
 		return [];
 	}
 	const listCollectionRef = collection(db, listId);
 	try {
 		const listSnapshot = await getDocs(listCollectionRef);
-		return listSnapshot.docs.map((doc) => getItemData(doc)); // Используем getItemData для форматирования
+		return listSnapshot.docs.map(getItemData);
 	} catch (error) {
-		console.error('Error getting list items for listId:', listId, error);
+		console.error(`Error getting list items for listId "${listId}":`, error);
 		throw error;
 	}
 }
 
 /**
  * Add a new item to the user's list in Firestore.
- * @param {string} listId The id of the list we're adding to.
- * @param {Object} itemData Information about the new item.
- * @param {string} itemData.itemName The name of the item.
- * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
 export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
-	if (!listId) {
-		console.error('addItem: listId is undefined or null. Cannot add item.');
-		throw new Error('List ID is missing. Cannot add item.');
+	if (!listId || typeof listId !== 'string') {
+		const err = new Error('List ID is missing or invalid. Cannot add item.');
+		console.error('addItem Error:', err.message, 'listId:', listId);
+		throw err;
 	}
-	if (!itemName || typeof itemName !== 'string' || itemName.trim() === '') {
-		console.error('addItem: itemName is invalid.');
-		throw new Error('Item name is invalid.');
+	const trimmedItemName = typeof itemName === 'string' ? itemName.trim() : '';
+	if (!trimmedItemName) {
+		const err = new Error('Item name is missing or invalid.');
+		console.error('addItem Error:', err.message, 'itemName:', itemName);
+		throw err;
 	}
 	if (
 		typeof daysUntilNextPurchase !== 'number' ||
 		isNaN(daysUntilNextPurchase)
 	) {
-		console.error('addItem: daysUntilNextPurchase is invalid.');
-		throw new Error('Days until next purchase is invalid.');
+		const err = new Error('Days until next purchase is invalid.');
+		console.error(
+			'addItem Error:',
+			err.message,
+			'days:',
+			daysUntilNextPurchase,
+		);
+		throw err;
 	}
 
 	const listCollectionRef = collection(db, listId);
-	// Оригинальный код использует itemName для name и dateCreated
-	// dateLastPurchased может быть null при первом добавлении
-	// dateNextPurchased рассчитывается
+	const newItemData = {
+		name: trimmedItemName,
+		normalizedName: normalizeItemName(trimmedItemName),
+		dateCreated: new Date(),
+		dateLastPurchased: null,
+		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
+		totalPurchases: 0,
+	};
+
 	try {
-		const newItem = {
-			dateCreated: new Date(), // Firestore Timestamp создастся автоматически при записи Date
-			dateLastPurchased: null, // При первом добавлении еще не покупался
-			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-			name: itemName.trim(), // Сохраняем оригинальное название (с тримом)
-			normalizedName: itemName
-				.trim()
-				.toLowerCase()
-				.replace(/[\s\W]|_+|s$/g, ''), // Для поиска дубликатов
-			totalPurchases: 0,
-		};
-		// console.log('Adding item to Firestore:', listId, newItem); // Для отладки
-		const newItemRef = await addDoc(listCollectionRef, newItem);
-		return newItemRef;
+		const docRef = await addDoc(listCollectionRef, newItemData);
+		return docRef;
 	} catch (error) {
-		console.error('Error adding item to Firestore for listId:', listId, error);
-		// Пробрасываем ошибку дальше, чтобы ее можно было поймать в AddItem.jsx
+		console.error(
+			`Error adding item to list "${listId}":`,
+			error.message,
+			error,
+		);
 		throw error;
 	}
 }
 
 /**
- * Extract item data from a Firestore document snapshot.
- * This is a helper function used by `streamListItems` and `getListItems`.
- * @param {Object} doc A Firestore document snapshot.
- * @returns {Object} The item data.
+ * Helper function to extract item data from a Firestore document snapshot.
  */
 export function getItemData(doc) {
+	const data = doc.data();
+	if (!data) {
+		return { id: doc.id };
+	}
+	// Преобразуем Firestore Timestamps в JavaScript Date объекты при чтении
+	const dateCreated = data.dateCreated?.toDate
+		? data.dateCreated.toDate()
+		: null;
+	const dateLastPurchased = data.dateLastPurchased?.toDate
+		? data.dateLastPurchased.toDate()
+		: null;
+	const dateNextPurchased = data.dateNextPurchased?.toDate
+		? data.dateNextPurchased.toDate()
+		: null;
+
 	return {
 		id: doc.id,
-		...doc.data(),
+		name: data.name || '',
+		normalizedName: data.normalizedName || normalizeItemName(data.name || ''),
+		dateCreated: dateCreated,
+		dateLastPurchased: dateLastPurchased,
+		dateNextPurchased: dateNextPurchased,
+		totalPurchases: data.totalPurchases || 0,
 	};
 }
 
-// Функции updateItem и deleteItem пока не реализованы в оригинальном коде,
-// поэтому их можно оставить закомментированными или добавить базовые заглушки.
+/**
+ * Check existence of list in Firestore associated with user token input.
+ */
+export async function validateToken(userTokenInput) {
+	if (
+		!userTokenInput ||
+		typeof userTokenInput !== 'string' ||
+		userTokenInput.trim() === ''
+	) {
+		return false;
+	}
+	try {
+		const listCollectionRef = collection(db, userTokenInput.trim());
+		await getDocs(listCollectionRef); // Просто пытаемся прочитать коллекцию
+		return true;
+	} catch (error) {
+		console.error(`Error validating token "${userTokenInput}":`, error.message);
+		return false;
+	}
+}
 
 /**
- * TODO: Update an item in the user's list.
+ * Update an item in the user's list, typically when it's marked as purchased.
+ * This function implements the "smart" logic from the original Collab Lab project.
  * @param {string} listId The id of the list.
  * @param {string} itemId The id of the item to update.
- * @param {Object} itemData The data to update the item with.
  */
-// export async function updateItem(listId, itemId, itemData) {
-// 	const itemRef = doc(db, listId, itemId);
-// 	await updateDoc(itemRef, itemData);
-// }
+export async function updateItem(listId, itemId) {
+	if (!listId || !itemId) {
+		const err = new Error('Missing listId or itemId for updateItem.');
+		console.error(err.message);
+		throw err;
+	}
+	const itemRef = doc(db, listId, itemId);
+
+	try {
+		const itemSnap = await getDoc(itemRef);
+		if (!itemSnap.exists()) {
+			throw new Error(`Item with ID ${itemId} not found in list ${listId}.`);
+		}
+
+		const itemData = itemSnap.data();
+		const now = new Date(); // Текущее время для dateLastPurchased
+
+		// Данные из документа (Firestore Timestamps нужно конвертировать в JS Date)
+		const dateLastPurchased = itemData.dateLastPurchased
+			? itemData.dateLastPurchased.toDate()
+			: CURRENT_DATE; // Если не было покупок, используем CURRENT_DATE для расчета первого интервала
+		const dateNextPurchased = itemData.dateNextPurchased.toDate();
+
+		let totalPurchases = itemData.totalPurchases || 0;
+
+		// Рассчитываем предыдущий интервал и новый интервал
+		const previousEstimateOfDays = getDaysBetweenDates(
+			dateLastPurchased, // Если dateLastPurchased null, getDaysBetweenDates должен это учесть или мы берем dateCreated
+			dateNextPurchased,
+		);
+
+		const actualNumberOfDays = itemData.dateLastPurchased // Если уже покупался
+			? getDaysBetweenDates(dateLastPurchased, now)
+			: getDaysBetweenDates(itemData.dateCreated.toDate(), now); // Если первая покупка, считаем от создания
+
+		totalPurchases++;
+
+		const newEstimateOfDays = calculateEstimate(
+			previousEstimateOfDays,
+			actualNumberOfDays,
+			totalPurchases,
+		);
+
+		const newDateNextPurchased = getFutureDate(newEstimateOfDays);
+
+		await updateDoc(itemRef, {
+			dateLastPurchased: now,
+			dateNextPurchased: newDateNextPurchased,
+			totalPurchases: totalPurchases,
+		});
+		// console.log(`Item ${itemId} in list ${listId} updated successfully.`);
+	} catch (error) {
+		console.error(`Error updating item ${itemId} in list ${listId}:`, error);
+		throw error;
+	}
+}
 
 /**
- * TODO: Delete an item from the user's list.
+ * Delete an item from the user's list.
  * @param {string} listId The id of the list.
  * @param {string} itemId The id of the item to delete.
  */
-// export async function deleteItem(listId, itemId) {
-// 	const itemRef = doc(db, listId, itemId);
-// 	await deleteDoc(itemRef);
-// }
-
-/**
- * Check existence of list in Firestore associated with user token input.
- * @param {string} userTokenInput The user's token input requesting to be validated
- */
-export async function validateToken(userTokenInput) {
-	if (!userTokenInput) return false; // Если токен пустой, сразу false
+export async function deleteItem(listId, itemId) {
+	if (!listId || !itemId) {
+		const err = new Error('Missing listId or itemId for deleteItem.');
+		console.error(err.message);
+		throw err;
+	}
+	const itemRef = doc(db, listId, itemId);
 	try {
-		const listCollectionRef = collection(db, userTokenInput);
-		const listSnapshot = await getDocs(listCollectionRef);
-		// Список считается существующим, если в "коллекции" (которая на самом деле является путем к документам этого списка) есть хотя бы один документ,
-		// или если мы просто хотим проверить, можно ли к этому пути обратиться.
-		// Для простоты: если getDocs не выдал ошибку и вернул snapshot, считаем, что "путь" валиден.
-		// Более строгая проверка могла бы быть `!listSnapshot.empty`, если мы ожидаем, что список всегда имеет элементы.
-		// Но пустой список тоже может существовать (например, только что созданный).
-		// Оригинальный код, кажется, не проверяет на пустоту, а просто факт существования коллекции.
-		// console.log(`Validating token ${userTokenInput}, snapshot size: ${listSnapshot.size}`);
-		return listSnapshot.size >= 0; // Если запрос прошел, токен "существует" в контексте пути
+		await deleteDoc(itemRef);
+		// console.log(`Item ${itemId} deleted successfully from list ${listId}.`);
 	} catch (error) {
-		console.error('Error validating token:', userTokenInput, error);
-		return false; // Если ошибка (например, неверный формат токена для Firestore пути), токен невалиден
+		console.error(`Error deleting item ${itemId} from list ${listId}:`, error);
+		throw error;
 	}
 }
