@@ -134,9 +134,6 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	}
 }
 
-/**
- * Helper function to extract item data from a Firestore document snapshot.
- */
 // Фрагмент из firebase_api_js_full_crud -> getItemData
 export function getItemData(doc) {
 	const data = doc.data();
