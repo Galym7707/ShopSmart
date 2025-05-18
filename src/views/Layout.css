@@ -1,0 +1,22 @@
+.Nav-link {
+	--color-text: var(--color-accent);
+	text-decoration: none;
+	color: var(--color-text);
+	font-weight: bold;
+}
+
+.Nav-link:hover {
+	text-decoration: underline;
+}
+
+.Nav-link.active {
+	text-decoration-thickness: 0.22em;
+	text-underline-offset: 0.1em;
+	text-decoration: underline;
+}
+
+.Menu-nav-link {
+	text-decoration: none;
+	color: inherit;
+	font-size: 1.1em;
+}

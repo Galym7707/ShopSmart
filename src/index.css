@@ -1,0 +1,18 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+/**
+ * Make sure the app fills the height of the screen.
+ * The fill-available value allows the browser to account
+ * for the address bar and other browser chrome on mobile.
+ */
+html,
+body,
+#root {
+	height: 100dvh;
+	height: -webkit-fill-available;
+	height: fill-available;
+}
