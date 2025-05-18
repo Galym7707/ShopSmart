@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom'; // Удален RouterLink
+import { Navigate } from 'react-router-dom';
 import {
 	Box,
 	Button,
@@ -20,7 +20,7 @@ import {
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-import logo from '../logo.png';
+import logo from '../logo.png'; // Убедись, что путь к лого правильный
 
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { validateToken } from '../api';
@@ -36,13 +36,15 @@ export function Home({ setListToken }) {
 
 	const [savedTokens, addToken, removeToken] = useListTokens();
 
+	// Твоя функция handleClick (переименована в handleCreateListClick для ясности)
 	function handleCreateListClick() {
 		const token = generateToken();
 		addToken(token);
 		setListToken(token);
-		setTokenToNavigate(token);
+		setTokenToNavigate(token); // Для навигации после установки токена
 	}
 
+	// Твоя функция handleSumbit (переименована в handleJoinListSubmit)
 	async function handleJoinListSubmit(e) {
 		e.preventDefault();
 		const trimmedToken = userTokenInput.trim();
@@ -61,7 +63,7 @@ export function Home({ setListToken }) {
 		if (isValid) {
 			addToken(trimmedToken);
 			setListToken(trimmedToken);
-			setTokenToNavigate(trimmedToken);
+			setTokenToNavigate(trimmedToken); // Для навигации
 		} else {
 			Toastify({
 				text: 'Sorry, this list token is not valid or the list does not exist.',
@@ -80,7 +82,7 @@ export function Home({ setListToken }) {
 	};
 
 	const handleRemoveTokenFromSaved = (event, tokenToRemove) => {
-		event.stopPropagation();
+		event.stopPropagation(); // Предотвращаем клик по ListItemButton
 		if (
 			window.confirm(
 				`Remove list "${tokenToRemove}" from your browser's memory? The list data itself will not be deleted.`,
@@ -100,29 +102,32 @@ export function Home({ setListToken }) {
 			justifyContent="center"
 			alignItems="center"
 			spacing={matchesMobileDevice ? 3 : 4}
-			sx={{ width: '100%', p: 2, mt: 2 }}
+			sx={{ width: '100%', p: 2, mt: { xs: 2, md: 4 } }} // Адаптивный отступ сверху
 		>
 			<img
 				src={logo}
 				alt="ShopSmart Logo"
-				width={matchesMobileDevice ? '180' : '250'}
-			/>
-
+				width={matchesMobileDevice ? '160' : '220'}
+			/>{' '}
+			{/* Немного уменьшил лого */}
 			<Typography
-				variant={matchesMobileDevice ? 'h5' : 'h4'}
+				variant={matchesMobileDevice ? 'h6' : 'h5'} // Сделал текст чуть меньше
 				textAlign="center"
 				gutterBottom
-				sx={{ fontWeight: 'medium', maxWidth: '600px' }}
+				sx={{
+					fontWeight: 'regular',
+					maxWidth: '550px',
+					color: 'text.secondary',
+				}} // Сделал текст второстепенным
 			>
 				The list that knows when it's time to stock up!
 			</Typography>
-
 			<Paper
-				elevation={3}
+				elevation={2}
 				sx={{
 					p: { xs: 2, sm: 3 },
 					width: '100%',
-					maxWidth: '500px',
+					maxWidth: '450px',
 					borderRadius: theme.shape.borderRadius,
 				}}
 			>
@@ -131,7 +136,7 @@ export function Home({ setListToken }) {
 						variant={matchesMobileDevice ? 'h6' : 'h5'}
 						component="h2"
 					>
-						Create a new shopping list.
+						Create a new shopping list
 					</Typography>
 					<Button
 						type="button"
@@ -144,20 +149,18 @@ export function Home({ setListToken }) {
 					</Button>
 				</Stack>
 			</Paper>
-
 			<Typography
-				variant={matchesMobileDevice ? 'h6' : 'h5'}
-				sx={{ fontWeight: 'medium' }}
+				variant="body1"
+				sx={{ fontWeight: 'medium', color: 'text.secondary' }}
 			>
-				- OR -
+				{/* Изменил на body1 для меньшего акцента */}- OR -
 			</Typography>
-
 			<Paper
-				elevation={3}
+				elevation={2}
 				sx={{
 					p: { xs: 2, sm: 3 },
 					width: '100%',
-					maxWidth: '500px',
+					maxWidth: '450px',
 					borderRadius: theme.shape.borderRadius,
 				}}
 			>
@@ -171,7 +174,7 @@ export function Home({ setListToken }) {
 							variant={matchesMobileDevice ? 'h6' : 'h5'}
 							component="h2"
 						>
-							Join an existing list.
+							Join an existing list
 						</Typography>
 						<TextField
 							type="text"
@@ -195,20 +198,19 @@ export function Home({ setListToken }) {
 					</Stack>
 				</Box>
 			</Paper>
-
 			{savedTokens.length > 0 && (
 				<Paper
-					elevation={3}
+					elevation={2}
 					sx={{
 						p: { xs: 2, sm: 3 },
 						mt: 3,
 						width: '100%',
-						maxWidth: '500px',
+						maxWidth: '450px',
 						borderRadius: theme.shape.borderRadius,
 					}}
 				>
 					<Typography
-						variant={matchesMobileDevice ? 'h6' : 'h5'}
+						variant="h6"
 						component="h2"
 						gutterBottom
 						textAlign="center"
@@ -227,17 +229,17 @@ export function Home({ setListToken }) {
 											onClick={(e) => handleRemoveTokenFromSaved(e, token)}
 											title="Remove from this browser's memory"
 										>
-											<DeleteOutlineIcon color="action" />
+											<DeleteOutlineIcon fontSize="small" color="action" />
 										</IconButton>
 									}
 								>
 									<ListItemButton
 										onClick={() => handleSavedTokenClick(token)}
 										title={`Open list: ${token}`}
+										sx={{ borderRadius: theme.shape.borderRadius - 4 }}
 									>
-										{/* ListItemIcon добавлен здесь */}
-										<ListItemIcon sx={{ minWidth: '40px' }}>
-											<OpenInNewIcon color="primary" />
+										<ListItemIcon sx={{ minWidth: '36px' }}>
+											<OpenInNewIcon color="primary" fontSize="small" />
 										</ListItemIcon>
 										<ListItemText
 											primary={token}
@@ -250,7 +252,7 @@ export function Home({ setListToken }) {
 										/>
 									</ListItemButton>
 								</ListItem>
-								{index < savedTokens.length - 1 && <Divider />}
+								{index < savedTokens.length - 1 && <Divider component="li" />}
 							</React.Fragment>
 						))}
 					</List>
@@ -258,7 +260,7 @@ export function Home({ setListToken }) {
 						variant="caption"
 						display="block"
 						textAlign="center"
-						sx={{ mt: 1, color: 'text.secondary' }}
+						sx={{ mt: 1.5, color: 'text.secondary' }}
 					>
 						These tokens are stored in your browser.
 					</Typography>

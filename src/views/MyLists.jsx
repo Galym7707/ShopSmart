@@ -21,9 +21,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useListTokens } from '../utils/hooks';
 
 export function MyLists({ setListToken }) {
-	// addToken здесь не используется, поэтому убираем его из деструктуризации
-	// eslint-disable-next-line no-unused-vars
-	const [savedTokens, _, removeToken] = useListTokens(); // Используем _ для неиспользуемой переменной addToken
+	// addToken здесь не используется, поэтому используем _ для пропуска
+	const [savedTokens, , removeToken] = useListTokens();
 	const navigate = useNavigate();
 	const theme = useTheme();
 
@@ -48,21 +47,21 @@ export function MyLists({ setListToken }) {
 	};
 
 	return (
-		<Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
+		<Container maxWidth="sm" sx={{ mt: { xs: 2, md: 4 }, mb: 4 }}>
 			<Paper
 				elevation={3}
 				sx={{
-					p: { xs: 2, sm: 3, md: 4 },
+					p: { xs: 2, sm: 3 },
 					borderRadius: theme.shape.borderRadius,
 					bgcolor: 'background.paper',
 				}}
 			>
 				<Typography
-					variant="h4"
+					variant="h5"
 					component="h1"
 					gutterBottom
 					textAlign="center"
-					sx={{ mb: 3 }}
+					sx={{ mb: 3, fontWeight: 'medium' }}
 				>
 					My Saved Lists
 				</Typography>
@@ -104,7 +103,9 @@ export function MyLists({ setListToken }) {
 										/>
 									</ListItemButton>
 								</ListItem>
-								{index < savedTokens.length - 1 && <Divider sx={{ my: 1 }} />}
+								{index < savedTokens.length - 1 && (
+									<Divider component="li" sx={{ my: 0.5 }} />
+								)}
 							</React.Fragment>
 						))}
 					</List>

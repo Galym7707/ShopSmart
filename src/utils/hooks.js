@@ -70,7 +70,6 @@ export function useListTokens(storageKey = 'listTokens') {
 	};
 
 	const removeToken = (tokenToRemove) => {
-		// ESLint: 'removeToken' is assigned a value but never used. (Это нормально пока)
 		setTokens((prevTokens) =>
 			prevTokens.filter((token) => token !== tokenToRemove),
 		);

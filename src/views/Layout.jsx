@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react'; // useEffect удален
+import { useState } from 'react';
 import {
 	Container,
 	Typography,
@@ -10,7 +10,7 @@ import {
 	IconButton,
 	Menu,
 	MenuItem,
-	// useMediaQuery, // Удален, так как prefersDarkMode не используется
+	// useMediaQuery, // Удален
 	useTheme,
 	Button,
 	Chip,
@@ -31,7 +31,7 @@ export function Layout({ listToken, setListToken }) {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const [copied, setCopied] = useState(false);
-	// const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)'); // Удалено
+	// prefersDarkMode удален
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -281,11 +281,19 @@ export function Layout({ listToken, setListToken }) {
 						<Box
 							sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
 						>
+							{/* Используем NavLink для My Lists, как ты указал */}
 							<NavLink
 								to="/my-lists"
 								className="Nav-link"
 								style={{ marginRight: theme.spacing(2) }}
-								onClick={handleGoToMyLists}
+								onClick={(e) => {
+									// Предотвращаем стандартное поведение NavLink, если мы хотим управлять навигацией через handleGoToMyLists
+									// Однако, если NavLink ведет на /my-lists, и handleGoToMyLists тоже делает navigate('/my-lists'),
+									// можно оставить стандартное поведение NavLink и убрать onClick, либо наоборот.
+									// Для консистентности с мобильным меню, оставим onClick.
+									e.preventDefault();
+									handleGoToMyLists();
+								}}
 							>
 								My Lists
 							</NavLink>

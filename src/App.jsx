@@ -11,24 +11,24 @@ import {
 import { MyLists } from './views/MyLists'; // Импортируем MyLists
 import { AddItem, Home, Layout, List } from './views';
 import { getItemData, streamListItems } from './api';
-import { useStateWithStorage, useListTokens } from './utils'; // Добавили useListTokens
+import { useStateWithStorage, useListTokens } from './utils'; // useListTokens импортирован
 import { ThemeProvider } from './theme/ThemeProvider';
 
 function JoinListTokenSetter({ setListToken }) {
 	const { tokenFromUrl } = useParams();
 	const navigate = useNavigate();
 	// eslint-disable-next-line no-unused-vars
-	const [_, addTokenToSaved] = useListTokens(); // Получаем addTokenToSaved
+	const [_, addToken] = useListTokens(); // Используем addToken здесь
 
 	useEffect(() => {
 		if (tokenFromUrl) {
-			addTokenToSaved(tokenFromUrl); // Сохраняем токен при переходе по прямой ссылке
+			addToken(tokenFromUrl); // Сохраняем токен при переходе по прямой ссылке
 			setListToken(tokenFromUrl);
 			navigate('/list', { replace: true });
 		} else {
 			navigate('/', { replace: true });
 		}
-	}, [tokenFromUrl, setListToken, navigate, addTokenToSaved]);
+	}, [tokenFromUrl, setListToken, navigate, addToken]);
 
 	return null;
 }
@@ -99,7 +99,6 @@ export function App() {
 						{/* Маршрут для MyLists */}
 						<Route
 							path="my-lists"
-							// Передаем setListToken, чтобы можно было выбрать список и сделать его активным
 							element={<MyLists setListToken={setListToken} />}
 						/>
 						<Route path="*" element={<Navigate to="/" replace />} />
